@@ -1,4 +1,4 @@
-# MovieNest
+## MovieNest
 MovieNest is a  movie streaming and discovery platform built with Next.js. It allows users to explore, search, and enjoy movies and TV shows across various genres.
 
 ## Features

@@ -5,25 +5,25 @@ import { StarIcon } from "lucide-react";
 const testimonials = [
   {
     id: 1,
-    name: "Omar Khalid",
+    name: "Omar Ben Ali",
     designation: "Movie Enthusiast",
-    testimonial: "MovieNest has completely changed how I watch movies. The streaming quality is excellent, and I always find new films to enjoy.",
+    testimonial: "MovieNest has changed how I watch movies. Great streaming quality and always something new to enjoy.",
     avatar: "https://randomuser.me/api/portraits/men/11.jpg",
     rating: 5,
   },
   {
     id: 2,
-    name: "Layla Hassan",
+    name: "Lina Chaabouni",
     designation: "TV Shows Fan",
-    testimonial: "I love how simple it is to track and bookmark my favorite shows. MovieNest always keeps me updated with trending series.",
+    testimonial: "Tracking and bookmarking shows is so easy. MovieNest keeps me updated with trending series.",
     avatar: "https://randomuser.me/api/portraits/women/12.jpg",
     rating: 4,
   },
   {
     id: 3,
-    name: "Yousef Al-Mansoor",
+    name: "Yousef Ali",
     designation: "Cinema Critic",
-    testimonial: "As someone who watches daily, MovieNest’s recommendations are always spot on. It helps me discover movies that match my taste.",
+    testimonial: "MovieNest’s recommendations are always spot on and help me discover movies that match my taste.",
     avatar: "https://randomuser.me/api/portraits/men/13.jpg",
     rating: 5,
   },
@@ -31,15 +31,15 @@ const testimonials = [
     id: 4,
     name: "Fatima Noor",
     designation: "Casual Viewer",
-    testimonial: "MovieNest makes it easy to find fun family-friendly content. The variety of genres keeps everyone entertained at home.",
+    testimonial: "It’s easy to find family-friendly content, and the variety of genres keeps everyone entertained.",
     avatar: "https://randomuser.me/api/portraits/women/14.jpg",
     rating: 3,
   },
   {
     id: 5,
-    name: "Ahmed Zayed",
+    name: "Ahmed Zitouni",
     designation: "Streaming Addict",
-    testimonial: "The platform runs smoothly with zero buffering issues. Binge-watching my favorite shows has never been this seamless.",
+    testimonial: "The platform runs smoothly with no buffering. Binge-watching has never been this seamless.",
     avatar: "https://randomuser.me/api/portraits/men/15.jpg",
     rating: 4,
   },
@@ -47,7 +47,7 @@ const testimonials = [
     id: 6,
     name: "Sara Ibrahim",
     designation: "Film Lover",
-    testimonial: "MovieNest’s clean interface makes discovering hidden gems fun. I love exploring both new releases and timeless classics.",
+    testimonial: "MovieNest’s clean interface makes finding hidden gems fun, from new releases to classics.",
     avatar: "https://randomuser.me/api/portraits/women/16.jpg",
     rating: 5,
   },
@@ -68,9 +68,9 @@ const Testimonials = () => (
       {/* testimonials */}
       <div className="mt-10">
         {/* left gradient */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full lg:w-60 w-20 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full lg:w-60 md:w-48 w-10 bg-gradient-to-r from-background to-transparent" />
         {/* right gradient */}
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full lg:w-60 w-20 bg-gradient-to-l from-background to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full lg:w-60 md:w-48 w-10 bg-gradient-to-l from-background to-transparent" />
 
         {/* marquee rows */}
         <div className="space-y-6">
@@ -99,8 +99,7 @@ const Testimonials = () => (
 );
 
 const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0] }) => (
-  <div className="lg:max-w-sm md:max-w-sm max-w-xs bg-accent rounded-xl p-6 shadow-md">
-
+  <div className="max-w-xs md:max-w-sm border border-neutral-200 dark:border-neutral-800 rounded-xl p-6 ">
     <div className="flex items-center justify-between">
       {/* profile */}
       <div className="flex items-center gap-4">
@@ -110,7 +109,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
           </AvatarFallback>
         </Avatar>
         <div>
-          <p className="font-semibold">{testimonial.name}</p>
+          <p className="text-md font-semibold">{testimonial.name}</p>
           <p className="text-sm text-muted-foreground">{testimonial.designation}</p>
         </div>
       </div>
@@ -123,7 +122,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
     </div>
 
     {/* testimonial */}
-    <p className="mt-5 text-base leading-relaxed ">{testimonial.testimonial}</p>
+    <p className="mt-5 leading-relaxed ">{testimonial.testimonial}</p>
 
   </div>
 );
