@@ -12,11 +12,7 @@ export const metadata: Metadata = {
   description: "A platform for streaming, discovering, and enjoying movies and shows across different genres.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
       <body className={`${inter.className}`}>

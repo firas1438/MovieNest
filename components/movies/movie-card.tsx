@@ -12,12 +12,12 @@ interface MovieCardProps {
 export function MovieCard({ movie }: MovieCardProps) {
   return (
     <Link href={`/movies/${movie.id}`}>
-      <Card className="overflow-hidden group cursor-pointer transition-transform hover:scale-105">
+      <Card className="overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02]">
         <div className="relative aspect-[2/3]">
           {/* poster image */}
-          <Image src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.svg"}  alt={movie.title}  fill className="object-cover"/>
+          <Image src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.svg"}  alt={movie.title}  fill className="object-cover" priority quality={100}/>
           {/* gradient overlay*/}
-          <div className="absolute -inset-0.5 bg-gradient-to-t from-card to-transparent opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute -inset-0.5 bg-gradient-to-t from-card to-transparent opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
           {/* play button */}
           <div className="absolute inset-0 flex items-center justify-center">
             <Button size="icon" variant="secondary" className="rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">

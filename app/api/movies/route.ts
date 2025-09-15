@@ -27,7 +27,7 @@ export async function GET(req: Request) {
       include_adult: "false",
     });
 
-    // Decide whether to search or discover
+    // decide whether to search or discover
     const endpoint = search
       ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(search)}&${params}`
       : `https://api.themoviedb.org/3/discover/movie?${params}`;

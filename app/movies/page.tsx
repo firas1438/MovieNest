@@ -21,33 +21,24 @@ export default function MoviesPage() {
 
   {/* API call */}
   const getMovies = useCallback(async () => {
-  setLoading(true);
-
-  const params = new URLSearchParams({
-    page: filters.page.toString(),
-    sortBy: filters.sortBy,
-    rating: filters.rating.toString(),
-    yearStart: filters.year[0].toString(),
-    yearEnd: filters.year[1].toString(),
-    genres: filters.genres.join(","),
-    search: filters.search,
-  });
-
-  try {
-    const res = await fetch(`/api/movies?${params}`);
-    const data: MovieResponse = await res.json();
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch movies");
+    {/* display loader */}
+    setLoading(true);
+    {/* construct query params */}
+    const params = new URLSearchParams({ page: filters.page.toString(), sortBy: filters.sortBy,  rating: filters.rating.toString(),  yearStart: filters.year[0].toString(),  yearEnd: filters.year[1].toString(),  genres: filters.genres.join(","),  search: filters.search,});
+    {/* fetch data */}
+    try {
+      const res = await fetch(`/api/movies?${params}`);
+      const data: MovieResponse = await res.json();
+      {/* handle errors */}
+      if (!res.ok) { throw new Error("Failed to fetch movies");}
+      {/* update state */}
+      setMovies(data.results);
+      setTotalPages(Math.min(data.total_pages, 500)); // TMDB caps at 500
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    } finally {
+      setLoading(false);
     }
-
-    setMovies(data.results);
-    setTotalPages(Math.min(data.total_pages, 500)); // TMDB caps at 500
-  } catch (error) {
-    console.error("Error fetching movies:", error);
-  } finally {
-    setLoading(false);
-  }
   }, [filters]);
 
   {/* fetch movies */}

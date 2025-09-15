@@ -4,6 +4,8 @@ import { ArrowUpRight, CirclePlay } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import LogoMarquee from "./marquee";
+import Link from "next/link";
+
 
 const Hero = () => {
   return (
@@ -26,9 +28,11 @@ const Hero = () => {
           </div>
           {/* buttons */}
           <div className="mt-8 flex flex-col sm:flex-row items-center sm:justify-center gap-4">
-            <Button size="lg" className="w-full sm:w-auto rounded-full text-base">
-              Start Watching <CirclePlay className="!h-5 !w-5" /> 
-            </Button>
+            <Link href="/movies">
+              <Button size="lg" className="w-full sm:w-auto rounded-full text-base">
+                Start Watching <CirclePlay className="!h-5 !w-5" /> 
+              </Button>
+            </Link>
             <Button variant="outline" size="lg" className="w-full sm:w-auto rounded-full text-base shadow-none">
               <ArrowUpRight className="!h-5 !w-5" /> Create Account
             </Button>

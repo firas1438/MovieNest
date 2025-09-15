@@ -1,134 +1,113 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { useParams } from "next/navigation";
-import { Star, Clock, Calendar, DollarSign } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Separator } from "@/components/ui/separator";
-import { BackButton } from "@/components/back-button";
-import { MovieCard } from "@/components/movies/movie-card";
-import { MovieDetails, MovieCredits, CastMember, SimilarMovie } from "@/types/movie";
-import { ExternalLink } from "lucide-react";
-import Link from "next/link";
-import Marquee from "react-fast-marquee";
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import { useParams } from "next/navigation"
+import { Star, Calendar, DollarSign, ExternalLink } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Separator } from "@/components/ui/separator"
+import { BackButton } from "@/components/back-button"
+import { ShowCard } from "@/components/shows/show-card"
+import { ShowDetails, ShowCredits, CastMember, SimilarShow} from "@/types/show"
+import Marquee from "react-fast-marquee"
 
+export default function ShowDetailsPage() {
+  const { id } = useParams()
+  const [loading, setLoading] = useState(true)
+  const [show, setShow] = useState<ShowDetails | null>(null)
+  const [credits, setCredits] = useState<ShowCredits | null>(null)
+  const [similarShows, setSimilarShows] = useState<SimilarShow[]>([])
 
-
-export default function MovieDetailsPage() {
-  const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [movie, setMovie] = useState<MovieDetails | null>(null);
-  const [credits, setCredits] = useState<MovieCredits | null>(null);
-  const [similarMovies, setSimilarMovies] = useState<SimilarMovie[]>([]);
-
-  {/* fetch movie details, credits, and recommended movies */}
+  {/* Fetch show details, credits, and similar shows */}
   useEffect(() => {
-    const fetchMovieData = async () => {
+    const fetchShowData = async () => {
       try {
-        {/* display loader */}
-        setLoading(true);
-        {/* fetch data */}
-        const response = await fetch(`/api/movies/${id}`);
-        {/* handle errors */}
-        if (!response.ok) { throw new Error("Failed to fetch movie data"); }
-        {/* parse response */}
-        const data = await response.json();
-        {/* update state */}
-        setMovie(data.movie);
-        setCredits(data.credits);
-        setSimilarMovies(data.similarMovies);
+        setLoading(true)
+        const response = await fetch(`/api/shows/${id}`)
+        if (!response.ok) {
+          throw new Error("Failed to fetch show data")
+        }
+        const data = await response.json()
+        setShow(data.show)
+        setCredits(data.credits)
+        setSimilarShows(data.similarShows)
       } catch (error) {
-        console.error("Error fetching movie data:", error);
+        console.error("Error fetching show data:", error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchMovieData();
-  }, [id]);
+    fetchShowData()
+  }, [id])
 
   if (loading) {
-    return <MovieDetailsSkeleton />;
+    return <ShowDetailsSkeleton />
   }
 
-  if (!movie || !credits) {
-    return <div className="container mx-auto px-4 ">Movie not found</div>;
+  if (!show || !credits) {
+    return <div className="container mx-auto px-4">Show not found</div>
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <BackButton />
 
-      {/* movie details */}
+      {/* show details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* movie poster */}
+        {/* show poster */}
         <div className="lg:col-span-1">
-          <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} width={500} height={750} className="rounded-lg shadow-lg w-full h-auto"/>
+          <Image src={`https://image.tmdb.org/t/p/w500${show.poster_path}`} alt={show.name} width={500} height={750} className="rounded-lg shadow-lg w-full h-auto" />
         </div>
-
-        {/* movie info */}
         <div className="lg:col-span-2">
-          {/* movie title */}
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2"> {movie.title}</h1>
-          {/* movie tagline */}
-          {movie.tagline && (
-            <p className="text-lg sm:text-xl text-muted-foreground mb-4 italic"> {movie.tagline}</p>
-          )}
-
+          {/* title */}
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2"> {show.name} </h1>
+          {/* tagline */}
+          {show.tagline && ( <p className="text-lg sm:text-xl text-muted-foreground mb-4 italic"> {show.tagline} </p>)}
           <div className="flex flex-wrap items-center gap-2 mb-4 text-xs sm:text-sm text-muted-foreground">
-            {/* movie rating */}
+            {/* rating */}
             <div className="flex items-center mr-2">
               <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400 mr-1" />
-              {movie.vote_average.toFixed(1)}
+              {show.vote_average.toFixed(1)}
             </div>
-            {/* movie duration */}
-            <div className="flex items-center mr-2">
-              <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />
-              {movie.runtime} min
-            </div>
-            {/* movie release date */}
-            <div className="flex items-center mr-2">
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />
-              {new Date(movie.release_date).getFullYear()}
-            </div>
+
+            {/* first air year */}
+            <div className="flex items-center mr-2"> <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1" /> {new Date(show.first_air_date).getFullYear()} </div>
             {/* status */}
-            <div>{movie.status}</div>
+            <div>{show.status}</div>
           </div>
 
-          {/* movie genres */}
+          {/* genres */}
           <div className="mb-4">
-            {movie.genres.map((genre) => (
+            {show.genres.map((genre) => (
               <Button key={genre.id} variant="outline" className="mr-2 mb-2 text-xs sm:text-sm rounded-2xl">
                 {genre.name}
               </Button>
             ))}
           </div>
 
-          {/* movie description */}
-          <p className="text-md mb-6 text-muted-foreground">{movie.overview}</p>
+          {/* overview */}
+          <p className="text-md mb-6 text-muted-foreground">{show.overview}</p>
 
-          {/* budget & revenue */}
+          {/* seasons & episodes */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            {/* movie budget */}
             <div>
-              <h3 className="font-semibold">Budget</h3>
-              <p> {movie.budget > 0 ? `$${movie.budget.toLocaleString()}` : "N/A"} </p>
+              <h3 className="font-semibold">Number of Seasons</h3>
+              <p>{show.number_of_seasons}</p>
             </div>
-            {/* movie revenue */}
             <div>
-              <h3 className="font-semibold">Revenue</h3>
-              <p> {movie.revenue > 0 ? `$${movie.revenue.toLocaleString()}` : "N/A"} </p>
-            </div> 
+              <h3 className="font-semibold">Number of Episodes</h3>
+              <p>{show.number_of_episodes}</p>
+            </div>
           </div>
 
-          {/* movie production companies */}
+          {/* production companies */}
           <div>
-            <h3 className="font-semibold mb-2 text-sm sm:text-base">Production Companies</h3>
+            <h3 className="font-semibold mb-2 text-sm sm:text-base"> Production Companies </h3>
             <div className="flex flex-wrap gap-2 sm:gap-4 mb-6">
-              {movie.production_companies.map((company) => (
+              {show.production_companies.map((company) => (
                 <div key={company.id} className="flex items-center bg-muted rounded-md p-1 sm:p-2">
                   {company.logo_path ? (
                     <Image src={`https://image.tmdb.org/t/p/w200${company.logo_path}`} alt={company.name} width={50} height={25} className="mr-2 w-6 sm:w-8 h-8"/>
@@ -142,14 +121,13 @@ export default function MovieDetailsPage() {
           </div>
 
         </div>
-
       </div>
 
       <Separator className="my-8" />
 
-      {/* movie cast */}
+      {/* show cast */}
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-bold mb-1">Cast</h2> 
+        <h2 className="text-2xl font-bold mb-1">Cast</h2>
         {/* actors marquee */}
         <div className="relative w-full overflow-hidden">
           {/* left gradient */}
@@ -159,7 +137,7 @@ export default function MovieDetailsPage() {
           {/* marquee */}
           <Marquee pauseOnHover className="w-full">
             <div className="flex gap-4 pr-4">
-              {credits.cast.slice(0, 12).map((actor) => (
+              {credits.cast.slice(0, 12).map((actor: CastMember) => (
                 <div key={actor.id} className="relative space-y-2 group w-40 flex-shrink-0">
                   <div className="overflow-hidden rounded-lg aspect-[3/4] relative">
                     {/* actor image */}
@@ -170,12 +148,11 @@ export default function MovieDetailsPage() {
                     <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-lg">
                       <Button asChild variant="secondary" size="sm" className="flex items-center gap-2 px-4 py-2">
                         <Link href={`https://www.themoviedb.org/person/${actor.id}`} target="_blank" rel="noopener noreferrer" >
-                          <span className="text-xs"> More Details</span><ExternalLink className="w-4 h-4" />
+                          <span className="text-xs"> More Details</span> <ExternalLink className="w-4 h-4" />
                         </Link>
                       </Button>
                     </div>
                   </div>
-
                   {/* actor name and role */}
                   <div className="space-y-1 py-1 text-center">
                     <h3 className="font-medium text-sm leading-none truncate">{actor.name}</h3>
@@ -185,6 +162,7 @@ export default function MovieDetailsPage() {
               ))}
             </div>
           </Marquee>
+
         </div>
       </div>
 
@@ -194,18 +172,17 @@ export default function MovieDetailsPage() {
       <div>
         <h2 className="text-2xl font-bold mb-6">Recommendations</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
-          {similarMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+          {similarShows.map((show) => (
+            <ShowCard key={show.id} show={show} />
           ))}
         </div>
       </div>
-
     </div>
-  );
+  )
 }
 
-// page skeleton
-function MovieDetailsSkeleton() {
+/* skeleton loader */
+function ShowDetailsSkeleton() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -248,5 +225,5 @@ function MovieDetailsSkeleton() {
         ))}
       </div>
     </div>
-  );
+  )
 }

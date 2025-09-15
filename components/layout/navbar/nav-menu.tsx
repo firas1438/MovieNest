@@ -13,22 +13,22 @@ export const NavMenu = (props: NavigationMenuProps) => (
     <NavigationMenuList className="gap-1.5 space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start">
       <NavigationMenuItem>
         <NavigationMenuLink asChild className="text-sm">
-          <Link href="/movies"><Button variant="ghost" className="rounded-xl font-mono font-bold" > MOVIES </Button></Link>
+          <Link href="/movies"><Button variant="ghost" className="rounded-xl  font-semibold" > MOVIES </Button></Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className="text-sm ">
-          <Link href="/shows"><Button variant="ghost" className="rounded-xl font-mono font-bold"> SHOWS </Button></Link>
+          <Link href="/shows"><Button variant="ghost" className="rounded-xl  font-semibold"> SHOWS </Button></Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className="text-sm ">
-          <Link href="/celebrities"><Button variant="ghost" className="rounded-xl font-mono font-bold"> CELEBRITIES </Button></Link>
+          <Link href="/celebrities"><Button variant="ghost" className="rounded-xl  font-semibold"> CELEBRITIES </Button></Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className="text-sm ">
-          <Link href="/bookmarks"><Button variant="ghost" className="rounded-xl font-mono font-bold"> BOOKMARKS </Button></Link>
+          <Link href="/bookmarks"><Button variant="ghost" className="rounded-xl  font-semibold"> BOOKMARKS </Button></Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>
