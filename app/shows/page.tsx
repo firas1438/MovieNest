@@ -24,7 +24,7 @@ export default function ShowsPage() {
     {/* display loader */}
     setLoading(true)
     {/* construct query params */}
-    const params = new URLSearchParams({  page: filters.page.toString(),  sortBy: filters.sortBy,  rating: filters.rating.toString(),  yearStart: filters.year[0].toString(),  yearEnd: filters.year[1].toString(),  genres: filters.genres.join(","),  search: filters.search,})
+    const params = new URLSearchParams({  page: filters.page.toString(),  sortBy: filters.sortBy,  rating: filters.rating.toString(),  yearStart: filters.year[0].toString(),  yearEnd: filters.year[1].toString(),  genres: filters.genres.join(","),  search: filters.search, include_adult: "false",})
     {/* fetch data */}
     try {
       const res = await fetch(`/api/shows?${params}`)
@@ -41,19 +41,19 @@ export default function ShowsPage() {
     }
   }, [filters])
 
-  {/* Fetch shows on filters change */}
+  {/* fetch shows on filters change */}
   useEffect(() => {
     getShows()
   }, [getShows])
 
-  {/* Handle searching */}
+  {/* handle searching */}
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     setFilters(prev => ({ ...prev, search: prev.search, page: 1 }))
     router.push(`/shows/?search=${encodeURIComponent(filters.search)}`)
   }
 
-  {/* Handle filtering */}
+  {/* handle filtering */}
   const handleFilterChange = useCallback((updates: Partial<FilterState>) => {
     setFilters(prev => ({ ...prev, ...updates, page: 1 }))
     const searchParams = new URLSearchParams({
@@ -66,7 +66,7 @@ export default function ShowsPage() {
     router.push(`/shows/?${searchParams.toString()}`)
   }, [router, filters])
 
-  {/* Clear filters */}
+  {/* clear filters */}
   const handleClearFilters = () => {
     setFilters({ year: [1900, currentYear], rating: 0, genres: [], sortBy: "popularity.desc", page: 1, search: "",})
     router.push("/shows")

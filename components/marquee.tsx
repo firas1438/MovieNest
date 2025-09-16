@@ -3,18 +3,18 @@ import Marquee from "react-fast-marquee";
 import Image from "next/image";
 
 const logos = [
-  { src: "/sponsors/netflix.png", alt: "Netflix Logo" },
-  { src: "/sponsors/hbo.png", alt: "HBO Logo" },
-  { src: "/sponsors/disney.png", alt: "Disney Logo" },
-  { src: "/sponsors/paramount.png", alt: "Paramount Logo" },
-  { src: "/sponsors/hulu.png", alt: "Hulu Logo" },
-  { src: "/sponsors/amc.png", alt: "Amc Logo" },
-  { src: "/sponsors/appletv.png", alt: "AppleTV Logo" },
-  { src: "/sponsors/prime.png", alt: "Prime Logo" },
-  { src: "/sponsors/crunchyroll.png", alt: "Crunchyroll Logo" },
-  { src: "/sponsors/slingtv.png", alt: "SlingTV Logo" },
-  { src: "/sponsors/peacock.png", alt: "PeacockTV Logo" },
-  { src: "/sponsors/tubi.png", alt: "Tubi Logo" },
+  { src: "/providers/netflix.png", alt: "Netflix Logo" },
+  { src: "/providers/hbo.png", alt: "HBO Logo" },
+  { src: "/providers/disney.png", alt: "Disney Logo" },
+  { src: "/providers/paramount.png", alt: "Paramount Logo" },
+  { src: "/providers/hulu.png", alt: "Hulu Logo" },
+  { src: "/providers/amc.png", alt: "Amc Logo" },
+  { src: "/providers/appletv.png", alt: "AppleTV Logo" },
+  { src: "/providers/prime.png", alt: "Prime Logo" },
+  { src: "/providers/crunchyroll.png", alt: "Crunchyroll Logo" },
+  { src: "/providers/slingtv.png", alt: "SlingTV Logo" },
+  { src: "/providers/peacock.png", alt: "PeacockTV Logo" },
+  { src: "/providers/tubi.png", alt: "Tubi Logo" },
 ];
 
 const LogoMarquee = () => (

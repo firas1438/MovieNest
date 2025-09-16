@@ -13,7 +13,7 @@ import { MovieDetails, MovieCredits, CastMember, SimilarMovie } from "@/types/mo
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
-
+import { Review } from "@/types/movie";
 
 
 export default function MovieDetailsPage() {
@@ -21,6 +21,7 @@ export default function MovieDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState<MovieDetails | null>(null);
   const [credits, setCredits] = useState<MovieCredits | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [similarMovies, setSimilarMovies] = useState<SimilarMovie[]>([]);
 
   {/* fetch movie details, credits, and recommended movies */}
@@ -38,6 +39,7 @@ export default function MovieDetailsPage() {
         {/* update state */}
         setMovie(data.movie);
         setCredits(data.credits);
+        setReviews(data.reviews);
         setSimilarMovies(data.similarMovies);
       } catch (error) {
         console.error("Error fetching movie data:", error);
@@ -159,7 +161,7 @@ export default function MovieDetailsPage() {
           {/* marquee */}
           <Marquee pauseOnHover className="w-full">
             <div className="flex gap-4 pr-4">
-              {credits.cast.slice(0, 12).map((actor) => (
+              {credits.cast.slice(0, 12).map((actor: CastMember) => (
                 <div key={actor.id} className="relative space-y-2 group w-40 flex-shrink-0">
                   <div className="overflow-hidden rounded-lg aspect-[3/4] relative">
                     {/* actor image */}
@@ -186,6 +188,47 @@ export default function MovieDetailsPage() {
             </div>
           </Marquee>
         </div>
+      </div>
+
+      <Separator className="my-8" />
+
+      {/* reviews */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Reviews</h2>
+        {!reviews || reviews.length === 0 ? (
+          <p className="text-muted-foreground">No reviews available for this movie.</p>
+        ) : (
+          <div className="space-y-4">
+            {reviews.slice(0, 5).map((review) => (
+              <div key={review.id} className="p-4 border rounded-lg shadow-sm bg-card">
+                {/* user review */}
+                <div className="flex items-center gap-3 mb-3">
+                  {review.author_details.avatar_path ? (
+                    <Image src={ review.author_details.avatar_path ? review.author_details.avatar_path.startsWith("/https") ? review.author_details.avatar_path.slice(1) : `https://image.tmdb.org/t/p/w200${review.author_details.avatar_path}` : "/placeholder.svg" } alt={review.author} width={40} height={40} className="w-10 h-10 rounded-full object-cover" />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-sm font-semibold">
+                      {review.author.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-sm">{review.author}</h4>
+                    <p className="text-xs text-muted-foreground">
+                      {new Date(review.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  {review.author_details.rating !== null && (
+                    <div className="flex items-center text-yellow-500 text-sm">
+                      <Star className="w-4 h-4 mr-1 fill-yellow-500" /> {review.author_details.rating}
+                    </div>
+                  )}
+                </div>
+                <p className="text-sm text-muted-foreground whitespace-pre-line">
+                  {review.content.length > 500 ? review.content.slice(0, 500) + "..." : review.content}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <Separator className="my-8" />

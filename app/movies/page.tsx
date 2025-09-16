@@ -24,7 +24,7 @@ export default function MoviesPage() {
     {/* display loader */}
     setLoading(true);
     {/* construct query params */}
-    const params = new URLSearchParams({ page: filters.page.toString(), sortBy: filters.sortBy,  rating: filters.rating.toString(),  yearStart: filters.year[0].toString(),  yearEnd: filters.year[1].toString(),  genres: filters.genres.join(","),  search: filters.search,});
+    const params = new URLSearchParams({ page: filters.page.toString(), sortBy: filters.sortBy,  rating: filters.rating.toString(),  yearStart: filters.year[0].toString(),  yearEnd: filters.year[1].toString(),  genres: filters.genres.join(","),  search: filters.search, include_adult: "false",});
     {/* fetch data */}
     try {
       const res = await fetch(`/api/movies?${params}`);

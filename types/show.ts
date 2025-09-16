@@ -55,3 +55,22 @@ export interface SimilarShow {
 export interface SimilarShowsResponse {
   results: SimilarShow[];
 }
+
+export interface Review {
+  id: string;
+  author: string;
+  content: string;
+  created_at: string;
+  author_details: {
+    avatar_path: string | null;
+    rating: number | null;
+  };
+}
+
+export interface ReviewsResponse {
+  id: number;
+  page: number;
+  results: Review[];
+  total_pages: number;
+  total_results: number;
+}

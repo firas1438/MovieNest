@@ -12,12 +12,15 @@ import { BackButton } from "@/components/back-button"
 import { ShowCard } from "@/components/shows/show-card"
 import { ShowDetails, ShowCredits, CastMember, SimilarShow} from "@/types/show"
 import Marquee from "react-fast-marquee"
+import { Review } from "@/types/show";
+
 
 export default function ShowDetailsPage() {
   const { id } = useParams()
   const [loading, setLoading] = useState(true)
   const [show, setShow] = useState<ShowDetails | null>(null)
   const [credits, setCredits] = useState<ShowCredits | null>(null)
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [similarShows, setSimilarShows] = useState<SimilarShow[]>([])
 
   {/* Fetch show details, credits, and similar shows */}
@@ -32,6 +35,7 @@ export default function ShowDetailsPage() {
         const data = await response.json()
         setShow(data.show)
         setCredits(data.credits)
+        setReviews(data.reviews);
         setSimilarShows(data.similarShows)
       } catch (error) {
         console.error("Error fetching show data:", error)
@@ -168,6 +172,46 @@ export default function ShowDetailsPage() {
 
       <Separator className="my-8" />
 
+      {/* reviews */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Reviews</h2>
+        {!reviews || reviews.length === 0 ? (
+          <p className="text-muted-foreground">No reviews available for this movie.</p>
+        ) : (
+          <div className="space-y-4">
+            {reviews.slice(0, 5).map((review) => (
+              <div key={review.id} className="p-4 border rounded-lg shadow-sm bg-card">
+                {/* user review */}
+                <div className="flex items-center gap-3 mb-3">
+                  {review.author_details.avatar_path ? (
+                    <Image src={ review.author_details.avatar_path ? review.author_details.avatar_path.startsWith("/https") ? review.author_details.avatar_path.slice(1) : `https://image.tmdb.org/t/p/w200${review.author_details.avatar_path}` : "/placeholder.svg" } alt={review.author} width={40} height={40} className="w-10 h-10 rounded-full object-cover" />                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-sm font-semibold">
+                      {review.author.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-sm">{review.author}</h4>
+                    <p className="text-xs text-muted-foreground">
+                      {new Date(review.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  {review.author_details.rating !== null && (
+                    <div className="flex items-center text-yellow-500 text-sm">
+                      <Star className="w-4 h-4 mr-1 fill-yellow-500" /> {review.author_details.rating}
+                    </div>
+                  )}
+                </div>
+                <p className="text-sm text-muted-foreground whitespace-pre-line">
+                  {review.content.length > 500 ? review.content.slice(0, 500) + "..." : review.content}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Separator className="my-8" />
+
       {/* recommendations */}
       <div>
         <h2 className="text-2xl font-bold mb-6">Recommendations</h2>
@@ -177,6 +221,7 @@ export default function ShowDetailsPage() {
           ))}
         </div>
       </div>
+      
     </div>
   )
 }
