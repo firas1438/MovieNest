@@ -139,7 +139,7 @@ export default function ShowDetailsPage() {
           {/* right gradient */}
           <div className="pointer-events-none absolute right-0 top-0 z-10 h-full lg:w-52 w-20 bg-gradient-to-l from-background to-transparent" />
           {/* marquee */}
-          <Marquee pauseOnHover className="w-full">
+          <Marquee pauseOnHover autoFill className="w-full">
             <div className="flex gap-4 pr-4">
               {credits.cast.slice(0, 12).map((actor: CastMember) => (
                 <div key={actor.id} className="relative space-y-2 group w-40 flex-shrink-0">
@@ -151,7 +151,7 @@ export default function ShowDetailsPage() {
                     {/* more details button */}
                     <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-lg">
                       <Button asChild variant="secondary" size="sm" className="flex items-center gap-2 px-4 py-2">
-                        <Link href={`https://www.themoviedb.org/person/${actor.id}`} target="_blank" rel="noopener noreferrer" >
+                        <Link href={`/celebrities/${actor.id}`}  rel="noopener noreferrer" >
                           <span className="text-xs"> More Details</span> <ExternalLink className="w-4 h-4" />
                         </Link>
                       </Button>

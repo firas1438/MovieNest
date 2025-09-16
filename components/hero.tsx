@@ -19,8 +19,8 @@ const Hero = () => {
           </Badge>
           {/* header */}
           <div> 
-            <h1 className="mt-8 lg:mt-6 text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold !leading-[1.2] tracking-tight font-mono">
-              Discover Movies and Shows
+            <h1 className="mt-8 lg:mt-6 text-4xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold !leading-[1.2] tracking-tight font-mono">
+              Discover Movies & Shows
             </h1>
             <p className="mt-6 lg:mt-4 text-md lg:text-lg">
               Experience the platform for streaming and discovering movies and shows across all genres. Find your next favorite and enjoy endless entertainment for absolutely free!
