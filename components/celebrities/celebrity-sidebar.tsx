@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 
 interface HonorableMention {
+  id: number
   name: string
   department: string
   profile_path: string | null
@@ -42,7 +43,7 @@ export function CelebritySidebar() {
         {loading
           ? skeletonItems.map((_, idx) => <CelebritySidebarSkeletonItem key={idx} />)
           : honorableMentions.map((celebrity, idx) => (
-              <Link key={idx} href="/" className="block rounded-lg hover:bg-accent dark:hover:bg-accent/50 transition-colors" >
+              <Link key={idx} href={`/celebrities/${celebrity.id}`} rel="noopener noreferrer" className="block rounded-lg hover:bg-accent dark:hover:bg-accent/50 transition-colors" >
                 <div className="flex items-center gap-4">
                   <Image src={celebrity.profile_path ? `https://image.tmdb.org/t/p/w92${celebrity.profile_path}` : "/placeholder.svg"} alt={celebrity.name} width={64} height={64} quality={100} priority className="aspect-square rounded-md object-cover" />
                   <div className="flex flex-col">
@@ -58,7 +59,7 @@ export function CelebritySidebar() {
 }
 
 
-// Skeleton
+// skeleton
 function CelebritySidebarSkeletonItem() {
   return (
     <div className="flex items-center gap-4 animate-pulse">

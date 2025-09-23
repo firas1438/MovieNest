@@ -15,7 +15,7 @@ export function MovieCard({ movie }: MovieCardProps) {
       <Card className="overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02]">
         <div className="relative aspect-[2/3]">
           {/* poster image */}
-          <Image src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.svg"}  alt={movie.title}  fill className="object-cover" priority quality={100}/>
+          <Image src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.svg"} alt={movie.title} fill className="object-cover" priority quality={100}/>
           {/* gradient overlay*/}
             <div className="absolute -inset-0.5 bg-gradient-to-t from-card to-transparent opacity-20 group-hover:opacity-100 transition-opacity duration-300" />
           {/* play button */}

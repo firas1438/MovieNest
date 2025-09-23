@@ -5,13 +5,19 @@ import React from "react";
 import Image from "next/image";
 import LogoMarquee from "./marquee";
 import Link from "next/link";
+import { AnimatedGridPattern } from "./ui/animated-grid-pattern";
+import { cn } from "@/lib/utils";
 
 
 const Hero = () => {
   return (
     <div className="min-h-[calc(100vh-6rem)] flex flex-col items-center px-6 py-4">
+      {/* background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <AnimatedGridPattern className={cn( "inset-x-0 inset-y-[-80%] h-[200%]" )} />
+      </div>
       {/* text content */}
-      <div className="md:mt-6 flex items-center justify-center">
+      <div className="md:mt-4 flex items-center justify-center">
         <div className="text-center max-w-4xl">
           {/* badge */}
           <Badge className="bg-primary rounded-full py-1 border-none">
@@ -23,7 +29,8 @@ const Hero = () => {
               Discover Movies & Shows
             </h1>
             <p className="mt-6 lg:mt-4 text-md lg:text-lg">
-              Experience the platform for streaming and discovering movies and shows across all genres. Find your next favorite and enjoy endless entertainment for absolutely free!
+              Experience the platform for streaming and discovering movies and shows across all genres. Find your next favorite and enjoy endless 
+              entertainment for absolutely free!
             </p>
           </div>
           {/* buttons */}
@@ -33,14 +40,14 @@ const Hero = () => {
                 Start Watching <CirclePlay className="!h-5 !w-5" /> 
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto rounded-full text-base shadow-none">
-              <ArrowUpRight className="!h-5 !w-5" /> Create Account
+            <Button variant="outline" size="lg" className="w-full sm:w-auto rounded-full text-base ">
+              Create Account <ArrowUpRight className="!h-5 !w-5" /> 
             </Button>
           </div>
         </div>
       </div>
       {/* app image */}
-      <div className="relative mt-14 overflow-hidden px-2 ">
+      <div className="relative mt-10 overflow-hidden px-2 bg-background">
         <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-t from-background to-transparent"/>
         <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-t from-background via-transparent to-transparent"/>
         <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl border p-4 shadow-lg dark:shadow-gray-800">
@@ -49,7 +56,7 @@ const Hero = () => {
         </div>
       </div>
       {/* marquee */}
-      <div className="mt-16"> 
+      <div className="mt-14"> 
         <LogoMarquee/>
       </div>
     </div>

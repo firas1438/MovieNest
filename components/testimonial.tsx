@@ -55,7 +55,7 @@ const testimonials = [
 
 
 const Testimonials = () => (
-  <section id="testimonials" className="space-y-8 py-4 md:py-12 lg:py-24">
+  <section id="testimonials" className="space-y-8 py-4 md:py-12 lg:py-20">
     <div className="w-full max-w-6xl mx-auto overflow-hidden relative">
       {/* header */}
       <div className="flex justify-center flex-col items-center gap-2 text-center px-4">
@@ -71,7 +71,6 @@ const Testimonials = () => (
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full lg:w-60 md:w-48 w-10 bg-gradient-to-r from-background to-transparent" />
         {/* right gradient */}
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full lg:w-60 md:w-48 w-10 bg-gradient-to-l from-background to-transparent" />
-
         {/* marquee rows */}
         <div className="space-y-6">
           {/* first row */}

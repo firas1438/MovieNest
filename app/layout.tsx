@@ -18,7 +18,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
       <body className={`${inter.className}`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
             <Navbar />
-            <div className="mx-auto px-8 sm:px-6 lg:px-16 py-10">
+            <div className="mx-auto px-8 sm:px-6 lg:px-16 py-8">
               {children}
             </div>
             <Footer/>

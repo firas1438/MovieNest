@@ -34,7 +34,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="space-y-8 py-20 md:py-12 lg:py-8">
-      {/* Header */}
+      {/* header */}
       <div className="flex flex-col items-center gap-3 text-center px-4">
         <h2 className="text-3xl md:text-4xl font-semibold font-mono">
           Frequently Asked Questions
@@ -44,7 +44,7 @@ export default function FAQ() {
         </p>
       </div>
 
-      {/* Accordion */}
+      {/* accordion */}
       <div className="max-w-5xl mx-auto px-4">
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (

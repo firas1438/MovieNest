@@ -1,20 +1,21 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
+import { Tooltip, TooltipContent, TooltipTrigger, } from "@/components/ui/tooltip"
 
 const logos = [
-  { src: "/providers/netflix.png", alt: "Netflix Logo" },
-  { src: "/providers/hbo.png", alt: "HBO Logo" },
-  { src: "/providers/disney.png", alt: "Disney Logo" },
-  { src: "/providers/paramount.png", alt: "Paramount Logo" },
-  { src: "/providers/hulu.png", alt: "Hulu Logo" },
-  { src: "/providers/amc.png", alt: "Amc Logo" },
-  { src: "/providers/appletv.png", alt: "AppleTV Logo" },
-  { src: "/providers/prime.png", alt: "Prime Logo" },
-  { src: "/providers/crunchyroll.png", alt: "Crunchyroll Logo" },
-  { src: "/providers/slingtv.png", alt: "SlingTV Logo" },
-  { src: "/providers/peacock.png", alt: "PeacockTV Logo" },
-  { src: "/providers/tubi.png", alt: "Tubi Logo" },
+  { src: "/providers/netflix.png", alt: "Netflix" },
+  { src: "/providers/hbo.png", alt: "HBO" },
+  { src: "/providers/disney.png", alt: "Disney" },
+  { src: "/providers/paramount.png", alt: "Paramount" },
+  { src: "/providers/hulu.png", alt: "Hulu" },
+  { src: "/providers/amc.png", alt: "AMC" },
+  { src: "/providers/appletv.png", alt: "AppleTV" },
+  { src: "/providers/prime.png", alt: "Prime" },
+  { src: "/providers/crunchyroll.png", alt: "Crunchyroll" },
+  { src: "/providers/slingtv.png", alt: "SlingTV" },
+  { src: "/providers/peacock.png", alt: "PeacockTV" },
+  { src: "/providers/tubi.png", alt: "Tubi" },
 ];
 
 const LogoMarquee = () => (
@@ -28,7 +29,14 @@ const LogoMarquee = () => (
     <Marquee autoFill pauseOnHover>
       <div className="flex items-center justify-center gap-4 sm:gap-8 px-2 sm:px-4">
         {logos.map((logo) => (
-          <Image key={logo.alt} src={logo.src} alt={logo.alt} width={100} height={50} className="w-auto dark:filter-none filter invert"/>
+          <Tooltip key={logo.alt}>
+            <TooltipTrigger>
+              <Image key={logo.alt} src={logo.src} alt={logo.alt} width={100} height={50} className="w-auto dark:filter-none filter invert"/>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="font-semibold text-xs">
+              {logo.alt}
+            </TooltipContent>
+          </Tooltip>
         ))}
       </div>
     </Marquee>

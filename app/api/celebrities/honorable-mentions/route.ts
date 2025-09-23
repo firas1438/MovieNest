@@ -28,6 +28,7 @@ export async function GET() {
 
       const data = await res.json();
       return {
+        id: data.id,
         name: data.name,
         profile_path: data.profile_path, 
         department: data.known_for_department, 

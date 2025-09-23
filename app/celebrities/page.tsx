@@ -24,6 +24,7 @@ export default function CelebritiesPage() {
   const [search, setSearch] = useState("");
   const router = useRouter();
 
+  // api call
   const getCelebrities = useCallback(async (pageNum: number, query = "") => {
     setLoading(true);
     try {
@@ -42,10 +43,12 @@ export default function CelebritiesPage() {
     }
   }, []);
 
+  // fetch celebrities on initial load and when page or search changes
   useEffect(() => {
     getCelebrities(page, search);
   }, [page, search, getCelebrities]);
 
+  // handle search
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
@@ -55,7 +58,7 @@ export default function CelebritiesPage() {
 
   return (
     <div className="flex flex-col md:flex-row gap-16">
-      {/* Sidebar placeholder */}
+      {/* sidebar */}
       <aside className="w-full md:w-60 md:sticky md:top-8 md:h-[calc(100vh-4rem)]">
         <CelebritySidebar/>
       </aside>
