@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signup } from "@/lib/auth";
-import { toast } from "@/hooks/use-toast"; // your shadcn toast hook
+import { toast } from "@/hooks/use-toast";
 
 export function SignUpForm() {
   const [loading, setLoading] = useState(false);

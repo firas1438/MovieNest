@@ -30,7 +30,7 @@ export function LoginForm() {
     setLoading(false);
 
     if (error) {
-      toast({ title: "Login failed", description: error.message, variant: "destructive", });
+      toast({ title: "Login failed!", description: error.message, variant: "destructive", });
     } else {
       toast({ title: "Welcome back!", description: "You have successfully logged in.", variant: "default", });
       router.push("/profile");
