@@ -25,14 +25,12 @@ const Navbar = () => {
 
           <ThemeToggle />
 
-          <Button variant="outline"  className="hidden sm:inline-flex  font-semibold">
-            <LogInIcon/>
-            SIGN IN
-          </Button>
-
-          <Button className="hidden xs:inline-flex  font-semibold">
-            GET STARTED
-          </Button>
+          <Link href="/login"> 
+            <Button variant="outline"  className="hidden sm:inline-flex  font-semibold">
+              <LogInIcon/>
+              SIGN IN
+            </Button>
+          </Link>
 
           {/* Mobile Menu */}
           <div className="md:hidden">

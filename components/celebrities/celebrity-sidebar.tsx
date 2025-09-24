@@ -62,7 +62,7 @@ export function CelebritySidebar() {
 // skeleton
 function CelebritySidebarSkeletonItem() {
   return (
-    <div className="flex items-center gap-4 animate-pulse">
+    <div className="flex items-center gap-4">
       <Skeleton className="w-16 h-16 rounded-md" />
       <div className="flex flex-col flex-1 gap-1">
         <Skeleton className="h-4 w-24 rounded" />

@@ -40,9 +40,11 @@ const Hero = () => {
                 Start Watching <CirclePlay className="!h-5 !w-5" /> 
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto rounded-full text-base ">
-              Create Account <ArrowUpRight className="!h-5 !w-5" /> 
-            </Button>
+            <Link href="/signup">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto rounded-full text-base ">
+                Create Account <ArrowUpRight className="!h-5 !w-5" /> 
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -51,8 +53,8 @@ const Hero = () => {
         <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-t from-background to-transparent"/>
         <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-t from-background via-transparent to-transparent"/>
         <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl border p-4 shadow-lg dark:shadow-gray-800">
-          <Image className="hidden rounded-2xl dark:block" src="/dark-snippet.png" alt="app screen" width={2700} height={1440}/>
-          <Image className="rounded-2xl block dark:hidden" src="/light-snippet.png" alt="app screen" width={2700} height={1440}/>
+          <Image className="hidden rounded-2xl dark:block" src="/dark-snippet.png" alt="MovieNest preview" width={2700} height={1440}/>
+          <Image className="rounded-2xl block dark:hidden" src="/light-snippet.png" alt="MovieNest preview" width={2700} height={1440}/>
         </div>
       </div>
       {/* marquee */}

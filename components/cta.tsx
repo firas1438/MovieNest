@@ -23,9 +23,11 @@ export default function CTABanner() {
               Start Watching <ArrowUpRight className="!h-5 !w-5" />
             </Button>
           </Link>
-          <Button size="lg" variant="outline">
-            Create Account <Forward className="!h-5 !w-5" />
-          </Button>
+          <Link href="/signup">
+            <Button size="lg" variant="outline">
+              Create Account <Forward className="!h-5 !w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
   );

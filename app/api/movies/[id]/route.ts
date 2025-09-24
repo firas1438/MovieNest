@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { MovieDetails, MovieCredits, SimilarMoviesResponse, ReviewsResponse, } from "@/types/movie";
 
-const TMDB_API_KEY = process.env.API_KEY;
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 export async function GET( request: Request, { params }: { params: { id: string } } ) {
   const { id } = params;

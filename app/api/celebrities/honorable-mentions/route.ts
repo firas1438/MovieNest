@@ -1,7 +1,7 @@
 // api/celebrities/honorable-mentions/route.ts
 import { NextResponse } from "next/server";
 
-const TMDB_API_KEY = process.env.API_KEY;
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 // static list of TMDb IDs for honorable mentions
 const HONORABLE_MENTIONS = [
