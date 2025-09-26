@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 // login service
 export async function login(email: string, password: string) {
@@ -32,5 +32,36 @@ export async function signInWithGoogle() {
     },
   });
     return { data, error };
+}
+
+// delete account service
+export async function deleteAccount() {
+  const supabase = createClient();
+
+  // get the current logged-in user
+  const { data: { user }, error: userError, } = await supabase.auth.getUser();
+  if (userError || !user) { return { error: userError || new Error("No user is currently logged in.") }; }
+
+  // call our secure API route
+  const response = await fetch("/api/profile/delete", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId: user.id }),
+  });
+
+  // save result message
+  let result;
+  try {
+    result = await response.json();
+  } catch {
+    return { error: new Error("Invalid JSON response from server") };
   }
 
+  if (!response.ok) { return { error: new Error(result.error || "Failed to delete account") }; }
+
+  // logout locally after account deletion
+  const { error: signOutError } = await supabase.auth.signOut();
+  if (signOutError) { return { error: signOutError }; }
+
+  return { error: null };
+}

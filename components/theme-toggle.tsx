@@ -1,31 +1,28 @@
 "use client";
-
-import { MoonIcon, SunIcon } from "lucide-react";
-import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon } from "lucide-react";
 
-const ThemeToggle = () => {
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+export default function ThemeSwitcher() {
+  const [svg, setSvg] = useState(<MoonIcon />);
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <Button variant="outline" size="icon" />;
-  }
+  const handleClick = () => {
+    if (theme === "light") {
+      setTheme("dark");
+      setSvg(<MoonIcon />);
+    } else {
+      setTheme("light");
+      setSvg(<SunIcon />);
+    }
+  };
 
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-    >
-      {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
-    </Button>
+    <div>
+      <Button size="icon" variant="outline" onClick={handleClick}>
+        {svg}
+      </Button>
+    </div>
   );
-};
-
-export default ThemeToggle;
+}

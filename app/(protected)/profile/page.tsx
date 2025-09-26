@@ -2,16 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { signout } from "@/lib/auth";
-import { toast } from "@/hooks/use-toast";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Mail, BookmarkIcon, Trash2, CheckCircle, XCircle, LogOutIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
+import LogoutButton from "./components/logout-button";
+import DeleteButton from "./components/delete-button";
+
 
 type Profile = {
   id: string;
@@ -39,16 +40,6 @@ export default function ProfilePage() {
     };
     fetchProfile();
   }, [router, supabase]);
-
-  const handleLogout = async () => {
-    const { error } = await signout();
-    if (!error) {
-      toast({ title: "Logout successful.", description: "Sign in to access your account again.", variant: "default", });
-      router.push("/login");
-    } else {
-      toast({ title: "Logout failed.", description: error.message, variant: "destructive", });
-    }
-  };
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -135,10 +126,7 @@ export default function ProfilePage() {
                   <Label className="text-base">Sign Out</Label>
                   <p className="text-muted-foreground text-sm">End your current session</p>
                 </div>
-                <Button variant="secondary" onClick={handleLogout}>
-                  <LogOutIcon className="mr-2 h-4 w-4"/>
-                  Sign Out
-                </Button>
+                <LogoutButton variant="secondary" />
               </div>
             </CardContent>
           </Card>
@@ -156,9 +144,7 @@ export default function ProfilePage() {
                   <p className="text-muted-foreground text-sm"> Permanently delete your account and all data </p>
                 </div>
                 {/* delete account button */}
-                <Button variant="destructive">
-                  <Trash2 className="mr-2 h-4 w-4" /> Delete Account
-                </Button>
+                <DeleteButton/>
               </div>
             </CardContent>
           </Card>
