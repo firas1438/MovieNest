@@ -6,8 +6,8 @@ import { Search } from 'lucide-react'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
-import { MovieCard } from "@/components/movies/movie-card"
-import { MovieFilters } from "@/components/movies/movie-filters"
+import { MovieCard } from "./components/movie-card"
+import { MovieFilters } from "./components/movie-filters"
 import type { Movie, MovieResponse, FilterState } from "@/types/movie"
 
 const currentYear = new Date().getFullYear()

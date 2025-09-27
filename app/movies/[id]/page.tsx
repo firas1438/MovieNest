@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import { BackButton } from "@/components/back-button";
-import { MovieCard } from "@/components/movies/movie-card";
+import { MovieCard } from "../components/movie-card";
 import { MovieDetails, MovieCredits, CastMember, SimilarMovie } from "@/types/movie";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";

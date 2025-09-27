@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Star, Play } from 'lucide-react'
 import { Movie, SimilarMovie } from "@/types/movie"
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 
 interface MovieCardProps {
   movie: Movie | SimilarMovie

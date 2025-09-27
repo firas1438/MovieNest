@@ -1,4 +1,3 @@
-import React from "react";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger, } from "@/components/ui/tooltip"
@@ -18,7 +17,9 @@ const logos = [
   { src: "/providers/tubi.png", alt: "Tubi" },
 ];
 
-const LogoMarquee = () => (
+// move & show providers
+
+const ProvidedBy = () => (
   <div className="max-w-7xl mx-auto overflow-hidden relative">
 
     {/* left gradient */}
@@ -44,4 +45,4 @@ const LogoMarquee = () => (
   </div>
 );
 
-export default LogoMarquee;
+export default ProvidedBy;

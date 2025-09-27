@@ -6,9 +6,9 @@ import { Search } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { CelebrityCard } from "@/components/celebrities/celebrity-card";
+import { CelebrityCard } from "./components/celebrity-card";
 import type { Celebrity } from "@/types/celebrity";
-import { CelebritySidebar } from "@/components/celebrities/celebrity-sidebar";
+import { CelebritySidebar } from "./components/celebrity-sidebar";
 
 interface CelebritiesResponse {
   page: number;

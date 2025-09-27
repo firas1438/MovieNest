@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Star, Play } from "lucide-react";
 import { Show, SimilarShow } from "@/types/show";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 interface ShowCardProps {
   show: Show | SimilarShow;

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import React from "react";
 import Image from "next/image";
-import LogoMarquee from "./marquee";
+import ProvidedBy from "./provided-by";
 import Link from "next/link";
 import { AnimatedGridPattern } from "./ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
@@ -57,9 +57,9 @@ const Hero = () => {
           <Image className="rounded-2xl block dark:hidden" src="/light-snippet.png" alt="MovieNest preview" width={2700} height={1440}/>
         </div>
       </div>
-      {/* marquee */}
+      {/* provided by logo marquee */}
       <div className="mt-14"> 
-        <LogoMarquee/>
+        <ProvidedBy/>
       </div>
     </div>
   );
