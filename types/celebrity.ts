@@ -43,7 +43,7 @@ export interface CelebrityDetails {
   imdb_id?: string;
 }
 
-// Combined credits (movies + TV)
+// combined credits (movies + TV)
 export interface CelebrityCombinedCredits {
   cast: Array<{
     id: number;
@@ -75,4 +75,17 @@ export interface CelebrityExternalIds {
   facebook_id?: string | null;
   instagram_id?: string | null;
   twitter_id?: string | null;
+}
+
+export interface CelebritiesResponse {
+  page: number;
+  total_pages: number;
+  results: Celebrity[];
+}
+
+export interface HonorableMention {
+  id: number
+  name: string
+  department: string
+  profile_path: string | null
 }

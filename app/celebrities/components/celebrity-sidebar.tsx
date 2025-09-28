@@ -3,13 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
-
-interface HonorableMention {
-  id: number
-  name: string
-  department: string
-  profile_path: string | null
-}
+import { HonorableMention } from "@/types/celebrity"
 
 
 export function CelebritySidebar() {

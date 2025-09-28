@@ -12,7 +12,7 @@ interface MovieCardProps {
 export function MovieCard({ movie }: MovieCardProps) {
   return (
     <Link href={`/movies/${movie.id}`}>
-      <Card className="overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02]">
+      <Card className="overflow-hidden group cursor-pointer transition-transform">
         <div className="relative aspect-[2/3]">
           {/* poster image */}
           <Image src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.svg"} alt={movie.title} fill className="object-cover" priority quality={100}/>

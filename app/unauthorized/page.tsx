@@ -18,8 +18,8 @@ export default function UnauthorizedPage() {
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="text-center space-y-6 mb-4">
-          <p> You can&apos;t access this page. Please log in with the correct account to continue or return to the homepage. </p>
+        <CardContent className="text-center space-y-8 mb-4">
+          <p> Please log in with the correct account or return to the homepage. </p>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild variant="default">

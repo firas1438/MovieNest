@@ -14,6 +14,7 @@ import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
 import { Review } from "@/types/movie";
+import { BookmarkButton } from "@/components/bookmark-button";
 
 
 export default function MovieDetailsPage() {
@@ -56,7 +57,7 @@ export default function MovieDetailsPage() {
   }
 
   if (!movie || !credits) {
-    return <div className="container mx-auto px-4 ">Movie not found</div>;
+    return <div className="container mx-auto px-4 ">Movie not found.</div>;
   }
 
   return (
@@ -73,11 +74,21 @@ export default function MovieDetailsPage() {
 
         {/* movie info */}
         <div className="lg:col-span-2">
-          {/* movie title */}
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2"> {movie.title}</h1>
+          {/* movie description */}
+          <div className="flex items-center justify-between mb-2">
+            {/* title */}
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+              {movie.title}
+            </h1>
+            {/* bookmark button */}
+            <BookmarkButton itemId={movie.id.toString()} itemType="movie" />
+          </div>
+
           {/* movie tagline */}
           {movie.tagline && (
-            <p className="text-lg sm:text-xl text-muted-foreground mb-4 italic"> {movie.tagline}</p>
+            <p className="text-lg sm:text-xl text-muted-foreground mb-4 italic">
+              {movie.tagline}
+            </p>
           )}
 
           <div className="flex flex-wrap items-center gap-2 mb-4 text-xs sm:text-sm text-muted-foreground">
@@ -236,7 +247,7 @@ export default function MovieDetailsPage() {
       {/* recommendations */}
       <div>
         <h2 className="text-2xl font-bold mb-6">Recommendations</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {similarMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}

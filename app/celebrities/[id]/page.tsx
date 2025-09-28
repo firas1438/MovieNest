@@ -136,7 +136,7 @@ export default function CelebrityDetailsPage() {
         {credits.cast.length === 0 ? (
           <p className="text-muted-foreground">No acting credits available.</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6">
             {credits.cast.slice(0, 10).map((credit) => (
               <div key={credit.id} className="space-y-2">
                 {/* image link */}
@@ -176,7 +176,7 @@ export default function CelebrityDetailsPage() {
         {credits.crew.length === 0 ? (
           <p className="text-muted-foreground">No crew credits available.</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6">
             {credits.crew.slice(0, 10).map((credit) => (
               <div key={credit.id} className="space-y-2">
                 {/* image link */}

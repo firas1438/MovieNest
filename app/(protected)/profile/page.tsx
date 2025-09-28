@@ -12,18 +12,8 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import LogoutButton from "./components/logout-button";
 import DeleteButton from "./components/delete-button";
+import { Profile } from "@/types/profile";
 
-
-type Profile = {
-  id: string;
-  full_name: string;
-  email: string;
-  avatar_url: string | null;
-  created_at: string;
-  last_sign_in_at: string | null;
-  provider: string;
-  email_verified: boolean;
-};
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -40,9 +30,10 @@ export default function ProfilePage() {
     };
     fetchProfile();
   }, [router, supabase]);
+  
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <div className="max-w-7xl mx-auto space-y-6">
       {profile && (
         <div className="space-y-6">
           
@@ -118,13 +109,13 @@ export default function ProfilePage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-xl">Session Management</CardTitle>
-              <CardDescription>Manage your active session</CardDescription>
+              <CardDescription>Manage your current session</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <Label className="text-base">Sign Out</Label>
-                  <p className="text-muted-foreground text-sm">End your current session</p>
+                  <p className="text-muted-foreground text-sm">End your current session. You can sign back in at any time.</p>
                 </div>
                 <LogoutButton variant="secondary" />
               </div>
@@ -135,13 +126,15 @@ export default function ProfilePage() {
           <Card className="border-destructive/50">
             <CardHeader>
               <CardTitle className="text-destructive text-xl">Danger Zone</CardTitle>
-              <CardDescription>Irreversible and destructive actions</CardDescription>
+              <CardDescription> These actions are permanent and cannot be undone. Proceed with caution. </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <Label className="text-base">Delete Account</Label>
-                  <p className="text-muted-foreground text-sm"> Permanently delete your account and all data </p>
+                  <p className="text-muted-foreground text-sm"> 
+                     Permanently delete your account, including all your bookmarks and personal data. This action is irreversible.
+                  </p>
                 </div>
                 {/* delete account button */}
                 <DeleteButton/>

@@ -8,7 +8,7 @@ import PoweredBy from "../powered-by";
 const Footer = () => {
   return (
     <footer className="mt-12 xs:mt-20 border-t">
-      <div className="max-w-[90rem] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between gap-x-16 gap-y-10">
+      <div className="max-w-[90rem] mx-auto px-8 lg:px-6 py-12 flex flex-col md:flex-row justify-between gap-x-16 gap-y-10">
         
         {/* brand Section  */}
         <div className="md:w-6/12 space-y-6">

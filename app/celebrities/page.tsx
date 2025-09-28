@@ -9,12 +9,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { CelebrityCard } from "./components/celebrity-card";
 import type { Celebrity } from "@/types/celebrity";
 import { CelebritySidebar } from "./components/celebrity-sidebar";
-
-interface CelebritiesResponse {
-  page: number;
-  total_pages: number;
-  results: Celebrity[];
-}
+import { CelebritiesResponse } from "@/types/celebrity";
 
 export default function CelebritiesPage() {
   const [celebrities, setCelebrities] = useState<Celebrity[]>([]);

@@ -9,10 +9,11 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Separator } from "@/components/ui/separator"
 import { BackButton } from "@/components/back-button"
-import { ShowCard } from "@/components/shows/show-card"
+import { ShowCard } from "../components/show-card"
 import { ShowDetails, ShowCredits, CastMember, SimilarShow} from "@/types/show"
 import Marquee from "react-fast-marquee"
 import { Review } from "@/types/show";
+import { BookmarkButton } from "@/components/bookmark-button"
 
 
 export default function ShowDetailsPage() {
@@ -23,7 +24,7 @@ export default function ShowDetailsPage() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [similarShows, setSimilarShows] = useState<SimilarShow[]>([])
 
-  {/* Fetch show details, credits, and similar shows */}
+  {/* fetch show details, credits, and similar shows */}
   useEffect(() => {
     const fetchShowData = async () => {
       try {
@@ -65,9 +66,16 @@ export default function ShowDetailsPage() {
         <div className="lg:col-span-1">
           <Image src={`https://image.tmdb.org/t/p/w500${show.poster_path}`} alt={show.name} width={500} height={750} className="rounded-lg shadow-lg w-full h-auto" />
         </div>
+
+        {/* show info */}
         <div className="lg:col-span-2">
-          {/* title */}
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2"> {show.name} </h1>
+          <div className="flex items-center justify-between mb-2">
+            {/* title */}
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2"> {show.name} </h1>
+            {/* bookmark button */}
+            <BookmarkButton itemId={show.id.toString()} itemType="show" />
+          </div>
+
           {/* tagline */}
           {show.tagline && ( <p className="text-lg sm:text-xl text-muted-foreground mb-4 italic"> {show.tagline} </p>)}
           <div className="flex flex-wrap items-center gap-2 mb-4 text-xs sm:text-sm text-muted-foreground">
@@ -215,7 +223,7 @@ export default function ShowDetailsPage() {
       {/* recommendations */}
       <div>
         <h2 className="text-2xl font-bold mb-6">Recommendations</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {similarShows.map((show) => (
             <ShowCard key={show.id} show={show} />
           ))}

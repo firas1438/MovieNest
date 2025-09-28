@@ -12,7 +12,7 @@ interface ShowCardProps {
 export function ShowCard({ show }: ShowCardProps) {
   return (
     <Link href={`/shows/${show.id}`}>
-      <Card className="overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02]">
+      <Card className="overflow-hidden group cursor-pointer transition-transform">
         <div className="relative aspect-[2/3]">
           {/* poster image */}
           <Image src={show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : "/placeholder.svg" } alt={show.name} fill className="object-cover" priority quality={100}/>
