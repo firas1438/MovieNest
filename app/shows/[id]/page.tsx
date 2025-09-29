@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
-import { Star, Calendar, DollarSign, ExternalLink } from "lucide-react"
+import { Star, Calendar, DollarSign, ExternalLink, Play } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -13,7 +13,10 @@ import { ShowCard } from "../components/show-card"
 import { ShowDetails, ShowCredits, CastMember, SimilarShow} from "@/types/show"
 import Marquee from "react-fast-marquee"
 import { Review } from "@/types/show";
-import { BookmarkButton } from "@/components/bookmark-button"
+import { BookmarkButton } from "@/components/bookmark-button";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import WatchShowDialog from "../components/show-dialog"
 
 
 export default function ShowDetailsPage() {
@@ -71,7 +74,7 @@ export default function ShowDetailsPage() {
         <div className="lg:col-span-2">
           <div className="flex items-center justify-between mb-2">
             {/* title */}
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2"> {show.name} </h1>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold "> {show.name} </h1>
             {/* bookmark button */}
             <BookmarkButton itemId={show.id.toString()} itemType="show" />
           </div>
@@ -94,14 +97,30 @@ export default function ShowDetailsPage() {
           {/* genres */}
           <div className="mb-4">
             {show.genres.map((genre) => (
-              <Button key={genre.id} variant="outline" className="mr-2 mb-2 text-xs sm:text-sm rounded-2xl">
+              <Badge key={genre.id} variant="secondary" className="mr-2 px-4 py-1 mb-2 text-xs sm:text-sm rounded-2xl" >
                 {genre.name}
-              </Button>
+              </Badge>
             ))}
           </div>
 
+
           {/* overview */}
-          <p className="text-md mb-6 text-muted-foreground">{show.overview}</p>
+          <p className="text-md mb-4 text-muted-foreground">{show.overview}</p>
+
+          {/* play button */}
+          <div className="flex items-center gap-4 mb-6">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="lg" variant="default" className="flex items-center gap-2 text-[0.98rem]">
+                  <Play className="mr-1 w-7 h-7" />
+                  Play
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-3xl overflow-hidden">
+                <WatchShowDialog show={show} />
+              </DialogContent>
+            </Dialog>
+          </div>
 
           {/* seasons & episodes */}
           <div className="grid grid-cols-2 gap-4 mb-6">
@@ -184,7 +203,7 @@ export default function ShowDetailsPage() {
       <div>
         <h2 className="text-2xl font-bold mb-6">Reviews</h2>
         {!reviews || reviews.length === 0 ? (
-          <p className="text-muted-foreground">No reviews available for this movie.</p>
+          <p className="text-muted-foreground">No reviews available for this show.</p>
         ) : (
           <div className="space-y-4">
             {reviews.slice(0, 5).map((review) => (
@@ -237,46 +256,79 @@ export default function ShowDetailsPage() {
 /* skeleton loader */
 function ShowDetailsSkeleton() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-1/3">
-          <Skeleton className="w-full aspect-[2/3] rounded-lg" />
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* back button */}
+      <div className="mb-4">
+        <Skeleton className="h-10 w-24 rounded-md" />
+      </div>
+
+      {/* show details */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* show poster */}
+        <div className="lg:col-span-1">
+          <Skeleton className="w-full aspect-[2/3] rounded-lg shadow-lg" />
         </div>
-        <div className="lg:w-2/3">
-          <Skeleton className="h-10 w-3/4 mb-2" />
-          <Skeleton className="h-6 w-1/2 mb-4" />
-          <div className="flex gap-2 mb-4">
-            <Skeleton className="h-8 w-20" />
-            <Skeleton className="h-8 w-20" />
-            <Skeleton className="h-8 w-20" />
+
+        {/* show info */}
+        <div className="lg:col-span-2">
+          {/* title and bookmark button */}
+          <div className="flex items-center justify-between mb-2">
+            <Skeleton className="h-8 sm:h-9 lg:h-10 w-3/4" />
+            <Skeleton className="h-8 w-8 rounded-md" />
           </div>
-          <Skeleton className="h-4 w-full mb-2" />
-          <Skeleton className="h-4 w-full mb-2" />
-          <Skeleton className="h-4 w-3/4 mb-6" />
+
+          {/* tagline */}
+          <Skeleton className="h-6 sm:h-7 w-1/2 mb-4" />
+
+          {/* show info summary */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <Skeleton className="h-5 w-16 mr-2" />
+            <Skeleton className="h-5 w-16 mr-2" />
+            <Skeleton className="h-5 w-16 mr-2" />
+          </div>
+
+          {/* genres */}
+          <div className="mb-4 flex flex-wrap gap-2">
+            <Skeleton className="h-6 w-20 rounded-2xl" />
+            <Skeleton className="h-6 w-16 rounded-2xl" />
+            <Skeleton className="h-6 w-24 rounded-2xl" />
+          </div>
+
+          {/* overview */}
+          <div className="space-y-2 mb-4">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-3/4" />
+          </div>
+
+          {/* play button */}
+          <div className="flex items-center gap-4 mb-6">
+            <Skeleton className="h-10 w-28 rounded-md" />
+          </div>
+
+          {/* budget & revenue */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
+            <div>
+              <Skeleton className="h-6 w-20 mb-2" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+            <div>
+              <Skeleton className="h-6 w-20 mb-2" />
+              <Skeleton className="h-4 w-24" />
+            </div>
           </div>
-          <Skeleton className="h-8 w-40 mb-2" />
-          <div className="flex flex-wrap gap-4 mb-6">
-            <Skeleton className="h-10 w-32" />
-            <Skeleton className="h-10 w-32" />
-            <Skeleton className="h-10 w-32" />
+
+          {/* production companies */}
+          <div>
+            <Skeleton className="h-6 w-40 mb-2" />
+            <div className="flex flex-wrap gap-2 sm:gap-4 mb-6">
+              <Skeleton className="h-10 w-24 rounded-md" />
+              <Skeleton className="h-10 w-24 rounded-md" />
+              <Skeleton className="h-10 w-24 rounded-md" />
+            </div>
           </div>
         </div>
-      </div>
-      <Skeleton className="h-8 w-40 my-8" />
-      <div className="flex gap-4 overflow-x-auto pb-4">
-        {[...Array(5)].map((_, i) => (
-          <Skeleton key={i} className="w-[150px] h-[225px]" />
-        ))}
-      </div>
-      <Skeleton className="h-8 w-40 my-8" />
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {[...Array(10)].map((_, i) => (
-          <Skeleton key={i} className="w-full aspect-[2/3]" />
-        ))}
       </div>
     </div>
-  )
+  );
 }

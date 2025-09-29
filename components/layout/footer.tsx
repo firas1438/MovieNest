@@ -74,10 +74,7 @@ const Footer = () => {
         {/* contact Section */}
         <div className="md:w-2/12 space-y-4">
           <h3 className="font-semibold text-sm">Contact</h3>
-          <a
-            href="mailto:support.movienest@proton.me"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <a href="mailto:support.movienest@proton.me" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors" >
             <Mail className="h-4 w-4" />
             support.movienest@proton.me
           </a>

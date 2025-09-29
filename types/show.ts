@@ -23,6 +23,7 @@ export interface FilterState {
   search: string;
 }
 
+
 export interface ShowDetails extends Show {
   backdrop_path: string | null;
   episode_run_time: number[];
@@ -31,8 +32,20 @@ export interface ShowDetails extends Show {
   status: string;
   number_of_seasons: number;
   number_of_episodes: number;
-  production_companies: { id: number; name: string; logo_path: string | null }[];
+  production_companies: { id: number; name: string; logo_path: string | null }[];  
+  seasons: Season[];
 }
+
+export interface Season {
+  season_number: number;
+  name: string;
+}
+
+export interface Episode {
+  episode_number: number;
+  name: string;
+}
+
 
 export interface CastMember {
   id: number;

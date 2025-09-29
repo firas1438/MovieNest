@@ -3,21 +3,13 @@
 import { useEffect, useState } from "react";
 import { MovieCard } from "@/app/movies/components/movie-card";
 import { ShowCard } from "@/app/shows/components/show-card";
-import { BookmarkButton } from "@/components/bookmark-button";
 import { Movie } from "@/types/movie";
 import { Show as ShowType } from "@/types/show";
 import { createClient } from "@/lib/supabase/client";
-import { Separator } from "@/components/ui/separator";
 import { Bookmark } from "@/types/bookmark";
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
 import Loader from "@/components/loader";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function BookmarksPage() {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
@@ -73,32 +65,23 @@ export default function BookmarksPage() {
     fetchBookmarks();
   }, []);
 
-  // remove bookmarks (UI only)
-  const handleRemove = (id: string, type: "movie" | "show") => {
-    setMoviesData((prev) => prev.filter((m) => m.id.toString() !== id));
-    setShowsData((prev) => prev.filter((s) => s.id.toString() !== id));
-    setBookmarks((prev) => prev.filter((b) => !(b.item_id === id && b.item_type === type)) );
-  };
-
   if (loading) {
     return <Loader/>;
   }
 
   return (
-    <div className="container mx-auto py-4 lg:px-10 md:px-8 px-6 space-y-10 ">
+    <div className="container mx-auto py-2 lg:px-10 md:px-8 px-6 space-y-10 ">
+      
       {/* movies section */}
       <div>
-        <h2 className="text-[1.35rem] ml-1 font-semibold mb-6 lg:mb-4"> Movies ({moviesData.length}) </h2>
+        <h2 className="text-[1.35rem] ml-1 font-semibold mb-2"> Movies ({moviesData.length}) </h2>
         {moviesData.length > 0 ? (
-          <Carousel className="w-full ">
-            <CarouselContent>
+          <Carousel className="w-full">
+            <CarouselContent className="py-2">
               {moviesData.map((movie) => (
                 <CarouselItem key={movie.id} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5" >
                   <div className="relative">
                     <MovieCard movie={movie} />
-                    <div className="absolute top-2 right-2">
-                      <BookmarkButton variant="outline" itemId={movie.id.toString()} itemType="movie" onRemove={() => handleRemove(movie.id.toString(), "movie") } />
-                    </div>
                   </div>
                 </CarouselItem>
               ))}
@@ -111,20 +94,16 @@ export default function BookmarksPage() {
         )}
       </div>
 
-
       {/* shows section */}
       <div>
-        <h2 className="text-[1.35rem] ml-1 font-semibold mb-6 lg:mb-4"> Shows ({showsData.length}) </h2>
+        <h2 className="text-[1.35rem] ml-1 font-semibold mb-2"> Shows ({showsData.length}) </h2>
         {showsData.length > 0 ? (
           <Carousel className="w-full">
-            <CarouselContent>
+            <CarouselContent className="py-2">
               {showsData.map((show) => (
                 <CarouselItem key={show.id} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5" >
                   <div className="relative">
                     <ShowCard show={show} />
-                    <div className="absolute top-2 right-2">
-                      <BookmarkButton variant="outline" itemId={show.id.toString()} itemType="show" onRemove={() => handleRemove(show.id.toString(), "show") } />
-                    </div>
                   </div>
                 </CarouselItem>
               ))}
@@ -136,6 +115,48 @@ export default function BookmarksPage() {
           <p className="text-muted-foreground">No bookmarked shows yet.</p>
         )}
       </div>
+
+      {/* bookmarks stats */}
+      <div className="space-y-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {/* movies bookmarked */}
+          <Card className="Server bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
+                Movies Bookmarked
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-center">{moviesData.length}</div>
+            </CardContent>
+          </Card>
+
+          {/* shows bookmarked */}
+          <Card className="Server bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
+                Shows Bookmarked
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-center">{showsData.length}</div>
+            </CardContent>
+          </Card>
+
+          {/* total bookmarks */}
+          <Card className="Server bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
+                Total Bookmarks
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-center">{moviesData.length + showsData.length}</div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
     </div>
   );
 }

@@ -10,11 +10,14 @@ import { Separator } from "@/components/ui/separator";
 import { BackButton } from "@/components/back-button";
 import { MovieCard } from "../components/movie-card";
 import { MovieDetails, MovieCredits, CastMember, SimilarMovie } from "@/types/movie";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Play } from "lucide-react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
 import { Review } from "@/types/movie";
 import { BookmarkButton } from "@/components/bookmark-button";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import WatchMovieDialog from "../components/movie-dialog";
 
 
 export default function MovieDetailsPage() {
@@ -66,21 +69,19 @@ export default function MovieDetailsPage() {
 
       {/* movie details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
+
         {/* movie poster */}
         <div className="lg:col-span-1">
-          <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} width={500} height={750} className="rounded-lg shadow-lg w-full h-auto"/>
+          <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} width={500} height={750} className="rounded-lg shadow-lg w-full h-auto" />
         </div>
 
         {/* movie info */}
         <div className="lg:col-span-2">
-          {/* movie description */}
+          {/* title and action buttons */}
           <div className="flex items-center justify-between mb-2">
-            {/* title */}
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
               {movie.title}
             </h1>
-            {/* bookmark button */}
             <BookmarkButton itemId={movie.id.toString()} itemType="movie" />
           </div>
 
@@ -91,60 +92,76 @@ export default function MovieDetailsPage() {
             </p>
           )}
 
+          {/* movie info summary */}
           <div className="flex flex-wrap items-center gap-2 mb-4 text-xs sm:text-sm text-muted-foreground">
-            {/* movie rating */}
             <div className="flex items-center mr-2">
               <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400 mr-1" />
               {movie.vote_average.toFixed(1)}
             </div>
-            {/* movie duration */}
             <div className="flex items-center mr-2">
               <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />
               {movie.runtime} min
             </div>
-            {/* movie release date */}
             <div className="flex items-center mr-2">
               <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />
               {new Date(movie.release_date).getFullYear()}
             </div>
-            {/* status */}
             <div>{movie.status}</div>
           </div>
 
-          {/* movie genres */}
+          {/* genres */}
           <div className="mb-4">
             {movie.genres.map((genre) => (
-              <Button key={genre.id} variant="outline" className="mr-2 mb-2 text-xs sm:text-sm rounded-2xl">
+              <Badge key={genre.id} variant="secondary" className="mr-2 px-4 py-1 mb-2 text-xs sm:text-sm rounded-2xl">
                 {genre.name}
-              </Button>
+              </Badge>
             ))}
           </div>
 
-          {/* movie description */}
-          <p className="text-md mb-6 text-muted-foreground">{movie.overview}</p>
+          {/* overview */}
+          <p className="text-md mb-4 text-muted-foreground">{movie.overview}</p>
+
+          {/* play button */}
+          <div className="flex items-center gap-4 mb-6">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="lg" variant="default" className="flex items-center gap-2 text-[0.98rem]">
+                  <Play className="mr-1 w-7 h-7" />
+                  Play
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl overflow-hidden">
+                <WatchMovieDialog movieId={movie.id} />
+              </DialogContent>
+            </Dialog>
+          </div>
 
           {/* budget & revenue */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            {/* movie budget */}
             <div>
               <h3 className="font-semibold">Budget</h3>
-              <p> {movie.budget > 0 ? `$${movie.budget.toLocaleString()}` : "N/A"} </p>
+              <p>{movie.budget > 0 ? `$${movie.budget.toLocaleString()}` : "N/A"}</p>
             </div>
-            {/* movie revenue */}
             <div>
               <h3 className="font-semibold">Revenue</h3>
-              <p> {movie.revenue > 0 ? `$${movie.revenue.toLocaleString()}` : "N/A"} </p>
-            </div> 
+              <p>{movie.revenue > 0 ? `$${movie.revenue.toLocaleString()}` : "N/A"}</p>
+            </div>
           </div>
 
-          {/* movie production companies */}
+          {/* production companies */}
           <div>
             <h3 className="font-semibold mb-2 text-sm sm:text-base">Production Companies</h3>
             <div className="flex flex-wrap gap-2 sm:gap-4 mb-6">
               {movie.production_companies.map((company) => (
                 <div key={company.id} className="flex items-center bg-muted rounded-md p-1 sm:p-2">
                   {company.logo_path ? (
-                    <Image src={`https://image.tmdb.org/t/p/w200${company.logo_path}`} alt={company.name} width={50} height={25} className="mr-2 w-6 sm:w-8 h-8"/>
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
+                      alt={company.name}
+                      width={50}
+                      height={25}
+                      className="mr-2 w-6 sm:w-8 h-8"
+                    />
                   ) : (
                     <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   )}
@@ -153,9 +170,7 @@ export default function MovieDetailsPage() {
               ))}
             </div>
           </div>
-
         </div>
-
       </div>
 
       <Separator className="my-8" />
@@ -261,45 +276,79 @@ export default function MovieDetailsPage() {
 // page skeleton
 function MovieDetailsSkeleton() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-1/3">
-          <Skeleton className="w-full aspect-[2/3] rounded-lg" />
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* back button */}
+      <div className="mb-4">
+        <Skeleton className="h-10 w-24 rounded-md" />
+      </div>
+
+      {/* movie details */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* movie poster */}
+        <div className="lg:col-span-1">
+          <Skeleton className="w-full aspect-[2/3] rounded-lg shadow-lg" />
         </div>
-        <div className="lg:w-2/3">
-          <Skeleton className="h-10 w-3/4 mb-2" />
-          <Skeleton className="h-6 w-1/2 mb-4" />
-          <div className="flex gap-2 mb-4">
-            <Skeleton className="h-8 w-20" />
-            <Skeleton className="h-8 w-20" />
-            <Skeleton className="h-8 w-20" />
+
+        {/* movie info */}
+        <div className="lg:col-span-2">
+          {/* title and bookmark button */}
+          <div className="flex items-center justify-between mb-2">
+            <Skeleton className="h-8 sm:h-9 lg:h-10 w-3/4" />
+            <Skeleton className="h-8 w-8 rounded-md" />
           </div>
-          <Skeleton className="h-4 w-full mb-2" />
-          <Skeleton className="h-4 w-full mb-2" />
-          <Skeleton className="h-4 w-3/4 mb-6" />
+
+          {/* tagline */}
+          <Skeleton className="h-6 sm:h-7 w-1/2 mb-4" />
+
+          {/* movie info summary */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <Skeleton className="h-5 w-16 mr-2" />
+            <Skeleton className="h-5 w-16 mr-2" />
+            <Skeleton className="h-5 w-16 mr-2" />
+            <Skeleton className="h-5 w-16" />
+          </div>
+
+          {/* genres */}
+          <div className="mb-4 flex flex-wrap gap-2">
+            <Skeleton className="h-6 w-20 rounded-2xl" />
+            <Skeleton className="h-6 w-20 rounded-2xl" />
+            <Skeleton className="h-6 w-20 rounded-2xl" />
+          </div>
+
+          {/* overview */}
+          <div className="space-y-2 mb-4">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-3/4" />
+          </div>
+
+          {/* play button */}
+          <div className="flex items-center gap-4 mb-6">
+            <Skeleton className="h-10 w-28 rounded-md" />
+          </div>
+
+          {/* budget & revenue */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
+            <div>
+              <Skeleton className="h-6 w-20 mb-2" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+            <div>
+              <Skeleton className="h-6 w-20 mb-2" />
+              <Skeleton className="h-4 w-24" />
+            </div>
           </div>
-          <Skeleton className="h-8 w-40 mb-2" />
-          <div className="flex flex-wrap gap-4 mb-6">
-            <Skeleton className="h-10 w-32" />
-            <Skeleton className="h-10 w-32" />
-            <Skeleton className="h-10 w-32" />
+
+          {/* production companies */}
+          <div>
+            <Skeleton className="h-6 w-40 mb-2" />
+            <div className="flex flex-wrap gap-2 sm:gap-4 mb-6">
+              <Skeleton className="h-10 w-24 rounded-md" />
+              <Skeleton className="h-10 w-24 rounded-md" />
+              <Skeleton className="h-10 w-24 rounded-md" />
+            </div>
           </div>
         </div>
-      </div>
-      <Skeleton className="h-8 w-40 my-8" />
-      <div className="flex gap-4 overflow-x-auto pb-4">
-        {[...Array(5)].map((_, i) => (
-          <Skeleton key={i} className="w-[150px] h-[225px]" />
-        ))}
-      </div>
-      <Skeleton className="h-8 w-40 my-8" />
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {[...Array(10)].map((_, i) => (
-          <Skeleton key={i} className="w-full aspect-[2/3]" />
-        ))}
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ export default function ProfilePage() {
         <div className="space-y-6">
           
           {/* basic info */}
-          <div className="p-6">
+          <div className="py-6 ">
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
               {/* avatar */}
               <div className="relative">
