@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 const logos = [
-  { src: "./poweredby/TMDB.svg", alt: "TMDB", h: 17 },
-  { src: "./poweredby/Nextjs.svg", alt: "Nextjs", h: 14  },
+  { src: "./poweredby/TMDB.svg", alt: "TMDB", h: 18 },
+  { src: "./poweredby/Nextjs.svg", alt: "Nextjs", h: 16  },
   { src: "./poweredby/Supabase.svg", alt: "Supabase", h: 18 },
   { src: "./poweredby/Vercel.svg", alt: "Vercel", h: 16 },
 ];

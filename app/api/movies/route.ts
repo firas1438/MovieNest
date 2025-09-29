@@ -1,7 +1,6 @@
-// /app/api/movies/route.ts
 import { NextResponse } from "next/server";
 
-const TMDB_API_KEY = process.env.TMDB_API_KEY; 
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -23,11 +22,12 @@ export async function GET(req: Request) {
       "primary_release_date.gte": `${yearStart}-01-01`,
       "primary_release_date.lte": `${yearEnd}-12-31`,
       with_genres: genres,
+      without_genres: "10749,18", // exclude romance (10749) and drama (18) genres for discover
       page,
       include_adult: "false",
     });
 
-    // decide whether to search or discover
+    // Decide whether to search or discover
     const endpoint = search
       ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(search)}&${params}`
       : `https://api.themoviedb.org/3/discover/movie?${params}`;
@@ -39,6 +39,15 @@ export async function GET(req: Request) {
     }
 
     const data = await res.json();
+
+    // filter out romance (10749) and drama (18) for search results
+    if (search) {
+      data.results = data.results.filter(
+        (movie: { genre_ids: number[] }) =>
+          !movie.genre_ids.includes(10749) && !movie.genre_ids.includes(18)
+      );
+    }
+
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

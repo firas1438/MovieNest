@@ -70,7 +70,7 @@ export default function BookmarksPage() {
   }
 
   return (
-    <div className="container mx-auto py-2 lg:px-10 md:px-8 px-6 space-y-10 ">
+    <div className="container mx-auto py-2 lg:px-10 md:px-8 px-6 space-y-8 ">
       
       {/* movies section */}
       <div>

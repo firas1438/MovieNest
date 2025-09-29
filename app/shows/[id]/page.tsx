@@ -95,14 +95,13 @@ export default function ShowDetailsPage() {
           </div>
 
           {/* genres */}
-          <div className="mb-4">
+          <div className="mb-3">
             {show.genres.map((genre) => (
               <Badge key={genre.id} variant="secondary" className="mr-2 px-4 py-1 mb-2 text-xs sm:text-sm rounded-2xl" >
                 {genre.name}
               </Badge>
             ))}
           </div>
-
 
           {/* overview */}
           <p className="text-md mb-4 text-muted-foreground">{show.overview}</p>

@@ -13,24 +13,42 @@ import { Label } from "@/components/ui/label";
 import LogoutButton from "./components/logout-button";
 import DeleteButton from "./components/delete-button";
 import { Profile } from "@/types/profile";
+import Loader from "@/components/loader";
 
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const supabase = createClient();
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      if (userError || !user) { router.push("/unauthorized"); return; }
-      const { data, error } = await supabase.from("profiles").select("*").eq("id", user.id).single();
-      if (error) { router.push("/unauthorized"); return; }
-      setProfile(data as Profile);
+      try {
+        // get authenticated user
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        if (userError || !user) { router.push("/unauthorized"); return; }
+
+        // fetch profile
+        const { data, error } = await supabase .from("profiles") .select("*") .eq("id", user.id) .single();
+        if (error || !data) { router.push("/unauthorized"); return; }
+
+        setProfile(data as Profile);
+      } catch (err) {
+        console.error("Unexpected error fetching profile:", err);
+        router.push("/unauthorized");
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchProfile();
   }, [router, supabase]);
+
   
+  if (loading) {
+    return <Loader/>;
+  }
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
