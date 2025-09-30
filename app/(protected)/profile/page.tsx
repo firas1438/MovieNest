@@ -56,30 +56,35 @@ export default function ProfilePage() {
         <div className="space-y-6">
           
           {/* basic info */}
-          <div className="py-6 ">
-            <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
+          <div className="py-5">
+            <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
               {/* avatar */}
               <div className="relative">
                 <Avatar className="h-24 w-24">
-                  <AvatarImage src={profile.avatar_url || "https://i.imgur.com/rGcuutZ.jpeg"} alt="profile"/>
-                  <AvatarFallback className="text-2xl"> {profile.full_name?.[0] || "U"} </AvatarFallback>
+                  <AvatarImage src={profile.avatar_url || "https://i.imgur.com/rGcuutZ.jpeg"} alt="profile" />
+                  <AvatarFallback className="text-2xl">
+                    {profile.full_name?.[0] || "U"}
+                  </AvatarFallback>
                 </Avatar>
               </div>
+              {/* user info */}
               <div className="flex-1 space-y-2">
                 {/* full name */}
-                <div className="flex flex-col gap-2 md:flex-row md:items-center">
-                  <h1 className="text-2xl font-bold">{profile.full_name || "User"}</h1>
-                  <Badge variant="secondary" className="max-w-fit">Member</Badge>
+                <div className="flex items-center gap-2 justify-center md:justify-start">
+                  <h1 className="text-2xl font-bold"> {profile.full_name || "User"} </h1>
+                  <Badge variant="secondary" className="max-w-fit"> Member </Badge>
                 </div>
                 {/* email */}
-                <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                <div className="text-muted-foreground flex items-center justify-center gap-1 text-sm md:justify-start">
                   <Mail className="size-4" />
-                  {profile.email}
+                  {profile.email} 
                 </div>
               </div>
               {/* bookmarks button */}
               <Link href="/bookmarks">
-                <Button variant="default"> <BookmarkIcon className="mr-2 h-4 w-4" /> Bookmarks </Button>
+                <Button variant="default">
+                  <BookmarkIcon className="mr-2 h-4 w-4" /> Bookmarks
+                </Button>
               </Link>
             </div>
           </div>
@@ -130,10 +135,12 @@ export default function ProfilePage() {
               <CardDescription>Manage your current session</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="space-y-1">
                   <Label className="text-base">Sign Out</Label>
-                  <p className="text-muted-foreground text-sm">End your current session. You can sign back in at any time.</p>
+                  <p className="text-muted-foreground text-sm">
+                    End your current session. You can sign back in at any time.
+                  </p>
                 </div>
                 <LogoutButton variant="secondary" />
               </div>
@@ -147,15 +154,15 @@ export default function ProfilePage() {
               <CardDescription> These actions are permanent and cannot be undone. Proceed with caution. </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="space-y-1">
                   <Label className="text-base">Delete Account</Label>
                   <p className="text-muted-foreground text-sm"> 
-                     Permanently delete your account, including all your bookmarks and personal data. This action is irreversible.
+                    Permanently delete your account, including all your bookmarks and personal data. This action is irreversible.
                   </p>
                 </div>
                 {/* delete account button */}
-                <DeleteButton/>
+                <DeleteButton />
               </div>
             </CardContent>
           </Card>
