@@ -74,7 +74,7 @@ export default function BookmarksPage() {
       
       {/* movies section */}
       <div>
-        <h2 className="text-[1.35rem] ml-1 font-semibold mb-2"> Movies ({moviesData.length}) </h2>
+        <h2 className="text-[1.35rem]  font-semibold mb-2"> Movies ({moviesData.length}) </h2>
         {moviesData.length > 0 ? (
           <Carousel className="w-full">
             <CarouselContent className="py-2">
@@ -90,13 +90,13 @@ export default function BookmarksPage() {
             <CarouselNext />
           </Carousel>
         ) : (
-          <p className="text-muted-foreground">No bookmarked movies yet.</p>
+          <p className=" text-muted-foreground">No bookmarked movies yet.</p>
         )}
       </div>
 
       {/* shows section */}
       <div>
-        <h2 className="text-[1.35rem] ml-1 font-semibold mb-2"> Shows ({showsData.length}) </h2>
+        <h2 className="text-[1.35rem]  font-semibold mb-2"> Shows ({showsData.length}) </h2>
         {showsData.length > 0 ? (
           <Carousel className="w-full">
             <CarouselContent className="py-2">
@@ -112,7 +112,7 @@ export default function BookmarksPage() {
             <CarouselNext />
           </Carousel>
         ) : (
-          <p className="text-muted-foreground">No bookmarked shows yet.</p>
+          <p className=" text-muted-foreground">No bookmarked shows yet.</p>
         )}
       </div>
 

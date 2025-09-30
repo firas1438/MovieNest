@@ -15,7 +15,7 @@ export default function DeleteButton() {
     const { error } = await deleteAccount();
 
     if (!error) {
-      toast({ title: "Account deleted successfully!", description: "Sign in to another account or create a new one", variant: "default", });
+      toast({ title: "Account deleted successfully!", description: "Sign in to another account or create a new one" });
       router.push("/login");
     } else {
       toast({ title: "Account deletion failed.", description: error.message, variant: "destructive", });

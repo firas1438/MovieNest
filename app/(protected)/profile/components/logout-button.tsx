@@ -20,7 +20,7 @@ export default function LogoutButton({ variant = "secondary", classname, }: Logo
     const { error } = await signout();
 
     if (!error) {
-      toast({ title: "Logout successful.", description: "Sign in to access your account again.", variant: "default", });
+      toast({ title: "Logout successful.", description: "Sign in to access your account again." });
       router.push("/login");
     } else {
       toast({ title: "Logout failed.", description: error.message, variant: "destructive", });

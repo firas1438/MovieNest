@@ -27,7 +27,7 @@ export function SignUpForm() {
 
     if (error) { toast({ title: "Signup failed!", description: error.message, variant: "destructive" }); return; }
 
-    toast({ title: "Signup successful!", description: "Please confirm your email before logging in", variant: "default" });
+    toast({ title: "Signup successful!", description: "Please confirm your email before logging in" });
   };
 
   return (

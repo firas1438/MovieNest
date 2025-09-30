@@ -32,7 +32,7 @@ export function LoginForm() {
     if (error) {
       toast({ title: "Login failed!", description: error.message, variant: "destructive", });
     } else {
-      toast({ title: "Welcome back!", description: "You have successfully logged in.", variant: "default", });
+      toast({ title: "Welcome back!", description: "You have successfully logged in." });
       router.push("/profile");
     }
   };
