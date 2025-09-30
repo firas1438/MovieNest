@@ -48,16 +48,25 @@ export function BookmarkButton({ itemId, itemType, onRemove, variant = "default"
         headers: { "Content-Type": "application/json" },
       });
       const json = await res.json();
+
       if (!json.error) {
         setBookmarked(!bookmarked);
+
+        // toast on success
+        toast({
+          title: bookmarked ? "Bookmark Removed" : "Bookmark Added",
+          description: bookmarked ? "This item has been removed from your bookmarks!" : "This item has been succesfully added to your bookmarks!",
+        });
+
         if (bookmarked && onRemove) onRemove(); // call parent only when removing
       }
     } catch (err) {
-      console.error(err);
+      toast({ title: "Error", description: "Something went wrong while updating your bookmark.", variant: "destructive", });
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <TooltipProvider>

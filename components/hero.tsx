@@ -49,12 +49,12 @@ const Hero = () => {
         </div>
       </div>
       {/* app image */}
-      <div className="relative mt-10 overflow-hidden px-2 bg-background">
+      <div className="relative mt-10 overflow-hidden bg-background">
         {/* gradient */}
         <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-t from-background to-transparent"/>
         <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-t from-background via-transparent to-transparent"/>
         {/* poster image */}
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl border p-4 shadow-lg dark:shadow-gray-800">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl border p-1 shadow-lg dark:shadow-gray-800">
           <Image className="hidden rounded-2xl dark:block" src="/dark-snippet.png" alt="MovieNest preview" width={2700} height={1440}/>
           <Image className="rounded-2xl block dark:hidden" src="/light-snippet.png" alt="MovieNest preview" width={2700} height={1440}/>
         </div>
