@@ -2,7 +2,6 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
-
 import { cn } from "@/lib/utils";
 
 interface AnimatedGridPatternProps {
@@ -16,6 +15,7 @@ interface AnimatedGridPatternProps {
   maxOpacity?: number;
   duration?: number;
   repeatDelay?: number;
+  showGradients?: boolean;
 }
 
 export function AnimatedGridPattern({
@@ -29,10 +29,11 @@ export function AnimatedGridPattern({
   maxOpacity = 0.05,
   duration = 4,
   repeatDelay = 0.5,
+  showGradients = false,
   ...props
 }: AnimatedGridPatternProps) {
   const id = useId();
-  const containerRef = useRef(null);
+  const containerRef = useRef<SVGSVGElement | null>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [squares, setSquares] = useState(() => generateSquares(numSquares));
 
@@ -43,7 +44,6 @@ export function AnimatedGridPattern({
     ];
   }
 
-  // Adjust the generateSquares function to return objects with an id, x, and y
   function generateSquares(count: number) {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
@@ -51,7 +51,6 @@ export function AnimatedGridPattern({
     }));
   }
 
-  // Function to update a single square's position
   const updateSquarePosition = (id: number) => {
     setSquares((currentSquares) =>
       currentSquares.map((sq) =>
@@ -60,19 +59,17 @@ export function AnimatedGridPattern({
               ...sq,
               pos: getPos(),
             }
-          : sq,
-      ),
+          : sq
+      )
     );
   };
 
-  // Update squares to animate in
   useEffect(() => {
     if (dimensions.width && dimensions.height) {
       setSquares(generateSquares(numSquares));
     }
   }, [dimensions, numSquares]);
 
-  // Resize observer to update container dimensions
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
@@ -92,16 +89,16 @@ export function AnimatedGridPattern({
         resizeObserver.unobserve(containerRef.current);
       }
     };
-  }, [containerRef]);
+  }, []);
 
   return (
-    <div>
+    <div className="absolute inset-0">
       <svg
         ref={containerRef}
         aria-hidden="true"
         className={cn(
           "pointer-events-none absolute inset-0 h-full w-full fill-neutral-300/40 stroke-neutral-300/45 dark:stroke-neutral-300/10",
-          className,
+          className
         )}
         {...props}
       >
@@ -125,6 +122,7 @@ export function AnimatedGridPattern({
         <svg x={x} y={y} className="overflow-visible">
           {squares.map(({ pos: [x, y], id }, index) => (
             <motion.rect
+              key={`${x}-${y}-${id}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: maxOpacity }}
               transition={{
@@ -134,7 +132,6 @@ export function AnimatedGridPattern({
                 repeatType: "reverse",
               }}
               onAnimationComplete={() => updateSquarePosition(id)}
-              key={`${x}-${y}-${index}`}
               width={width - 1}
               height={height - 1}
               x={x * width + 1}
@@ -145,11 +142,14 @@ export function AnimatedGridPattern({
           ))}
         </svg>
       </svg>
-      {/* gradients */}
-      <div>
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-background via-background/80 to-transparent" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background to-transparent" />
-      </div>
+
+      {/* Optional gradient overlays */}
+      {showGradients && (
+        <>
+          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-background via-background/80 to-transparent" />
+          <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background to-transparent" />
+        </>
+      )}
     </div>
   );
 }

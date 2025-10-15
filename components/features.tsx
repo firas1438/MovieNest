@@ -1,5 +1,6 @@
 import React from "react";
 import { Globe, Shield, Star, Zap, Rocket, Film } from "lucide-react";
+import MotionWrapper from "./ui/motion-wrapper";
 
 export default function Features() {
 const features = [
@@ -12,27 +13,29 @@ const features = [
 ];
 
   return (
-    <section id="features" className="space-y-8 pt-16 md:py-12 lg:py-20">
-      <div className=" flex justify-center flex-col items-center gap-2 text-center px-4">
-        <h2 className="text-3xl md:text-4xl font-semibold font-mono"> Features</h2>
-        <p className="text-muted-foreground sm:text-lg">
-          Explore the key benefits and powerful tools we offer to enhance your experience.
-        </p>
-      </div>
+    <MotionWrapper delay={0.2} variant="fadeIn">
+      <section id="features" className="space-y-8 pt-16 md:py-12 lg:py-20">
+        <div className=" flex justify-center flex-col items-center gap-2 text-center px-4">
+          <h2 className="text-3xl md:text-4xl font-semibold font-mono"> Features</h2>
+          <p className="text-muted-foreground sm:text-lg">
+            Explore the key benefits and powerful tools we offer to enhance your experience.
+          </p>
+        </div>
 
-      <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-5xl md:grid-cols-3">
-        {features.map((feature, index) => (
-          <div key={index} className="relative overflow-hidden rounded-lg border bg-background p-2">
-            <div className="flex h-[180px] flex-col rounded-md p-6 gap-4">
-              {feature.icon}
-              <div className="space-y-2">
-                <h3 className="font-bold text-lg ">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground ">{feature.description}</p>
+        <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-5xl md:grid-cols-3">
+          {features.map((feature, index) => (
+            <div key={index} className="relative overflow-hidden rounded-lg border bg-background p-2">
+              <div className="flex h-[180px] flex-col rounded-md p-6 gap-4">
+                {feature.icon}
+                <div className="space-y-2">
+                  <h3 className="font-bold text-lg ">{feature.title}</h3>
+                  <p className="text-sm text-muted-foreground ">{feature.description}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+    </MotionWrapper>
   );
 }

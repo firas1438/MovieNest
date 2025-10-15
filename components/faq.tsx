@@ -1,5 +1,6 @@
 import React from "react";
 import { Accordion, AccordionItem, AccordionTrigger,  AccordionContent,} from "@/components/ui/accordion";
+import MotionWrapper from "./ui/motion-wrapper";
 
 
 export default function FAQ() {
@@ -33,32 +34,34 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="space-y-8 py-20 md:py-12 lg:py-8">
-      {/* header */}
-      <div className="flex flex-col items-center gap-3 text-center px-4">
-        <h2 className="text-3xl md:text-4xl font-semibold font-mono">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl">
-          Find answers to the most common questions about using MovieNest.
-        </p>
-      </div>
+    <MotionWrapper delay={0.2} variant="fadeIn">
+      <section id="faq" className="space-y-8 py-20 md:py-12 lg:py-8">
+        {/* header */}
+        <div className="flex flex-col items-center gap-3 text-center px-4">
+          <h2 className="text-3xl md:text-4xl font-semibold font-mono">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl">
+            Find answers to the most common questions about using MovieNest.
+          </p>
+        </div>
 
-      {/* accordion */}
-      <div className="max-w-5xl mx-auto px-4">
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`faq-${index}`}>
-              <AccordionTrigger className="text-left text-lg ">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-base">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
+        {/* accordion */}
+        <div className="max-w-5xl mx-auto px-4">
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`faq-${index}`}>
+                <AccordionTrigger className="text-left text-lg ">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground text-base">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+    </MotionWrapper>
   );
 }
