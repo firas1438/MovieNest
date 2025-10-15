@@ -12,8 +12,8 @@ export default function CTABanner() {
     <MotionWrapper delay={0.2} variant="slideLeft">
       <div className="relative overflow-hidden w-full max-w-6xl mx-auto rounded-2xl mt-20 lg:my-4 md:my-10 py-14 md:py-16 px-10 md:px-14 bg-background dark:bg-background-dark text-foreground dark:text-foreground-dark border border-neutral-200 dark:border-neutral-800" >
         {/* background */}
-        <AnimatedGridPattern numSquares={30} maxOpacity={0.8} duration={2} className={cn( "[mask-image:radial-gradient(400px_circle_at_right,white,rgba(255,255,255,0.6),transparent)]", "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12 text-neutral-300 dark:text-neutral-700 absolute" )} />
-        <AnimatedGridPattern numSquares={30} maxOpacity={0.8} duration={2} className={cn( "[mask-image:radial-gradient(400px_circle_at_top_left,white,rgba(255,255,255,0.6),transparent)]", "inset-x-0 inset-y-0 h-[200%] skew-y-12 text-neutral-300 dark:text-neutral-700 absolute" )} />
+        <AnimatedGridPattern numSquares={30} maxOpacity={0.8} duration={3} className={cn( "[mask-image:radial-gradient(400px_circle_at_right,white,rgba(255,255,255,0.6),transparent)]", "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12 text-neutral-300 dark:text-neutral-700 absolute" )} />
+        <AnimatedGridPattern numSquares={30} maxOpacity={0.8} duration={3} className={cn( "[mask-image:radial-gradient(400px_circle_at_top_left,white,rgba(255,255,255,0.6),transparent)]", "inset-x-0 inset-y-0 h-[200%] skew-y-12 text-neutral-300 dark:text-neutral-700 absolute" )} />
         {/* text content */}
         <div className="relative z-10 flex flex-col gap-3">
           <h3 className="text-3xl md:text-4xl font-semibold font-mono">
