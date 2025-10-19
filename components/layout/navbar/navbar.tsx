@@ -12,7 +12,7 @@ import MotionWrapper from "@/components/ui/motion-wrapper";
 const Navbar = () => {
 
   return (
-    <MotionWrapper variant="blurIn">
+    <MotionWrapper variant="slideDown">
       <nav className="h-16 bg-background border-b border-accent">
         <div className="h-full flex items-center justify-between max-w-screen-7xl mx-auto px-4 sm:px-16">
           {/* left section */}

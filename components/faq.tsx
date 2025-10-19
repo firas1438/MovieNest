@@ -34,7 +34,7 @@ export default function FAQ() {
   ];
 
   return (
-    <MotionWrapper delay={0.2} variant="fadeIn">
+    <MotionWrapper delay={0.2} variant="slideLeft">
       <section id="faq" className="space-y-8 py-20 md:py-12 lg:py-8">
         {/* header */}
         <div className="flex flex-col items-center gap-3 text-center px-4">

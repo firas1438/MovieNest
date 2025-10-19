@@ -55,7 +55,7 @@ const testimonials = [
 ];
 
 const Testimonials = () => (
-  <MotionWrapper delay={0.2} variant="fadeIn">
+  <MotionWrapper delay={0.2} variant="slideRight">
     <section id="testimonials" className="space-y-8 py-4 md:py-12 lg:py-20">
       <div className="w-full max-w-6xl mx-auto overflow-hidden relative">
         {/* header */}

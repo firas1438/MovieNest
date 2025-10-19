@@ -13,7 +13,7 @@ const features = [
 ];
 
   return (
-    <MotionWrapper delay={0.2} variant="fadeIn">
+    <MotionWrapper delay={0.2} variant="slideRight">
       <section id="features" className="space-y-8 pt-16 md:py-12 lg:py-20">
         <div className=" flex justify-center flex-col items-center gap-2 text-center px-4">
           <h2 className="text-3xl md:text-4xl font-semibold font-mono"> Features</h2>

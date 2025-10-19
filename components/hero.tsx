@@ -18,7 +18,7 @@ const Hero = () => {
         <AnimatedGridPattern showGradients={true} className={cn( "inset-x-0 inset-y-[-80%] h-[200%]" )} />
       </div>
       {/* animation */}
-      <MotionWrapper variant="blurIn">
+      <MotionWrapper variant="slideUp">
         {/* text content */}
         <div className="md:mt-4 flex items-center justify-center">
           <div className="text-center max-w-4xl">
@@ -63,9 +63,9 @@ const Hero = () => {
           </div>
         </div>
       </MotionWrapper>
-      <MotionWrapper variant="slideLeft" delay={0.3}>
+      <MotionWrapper variant="scaleIn" >
         {/* provided by logo marquee */}
-        <div className="mt-14"> 
+        <div className="mt-10"> 
           <ProvidedBy/>
         </div>
       </MotionWrapper>
