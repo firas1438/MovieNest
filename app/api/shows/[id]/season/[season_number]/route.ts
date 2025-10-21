@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string; season_number: string } }
-) {
+export async function GET( request: NextRequest, { params }: { params: { id: string; season_number: string } } ) {
   const { id, season_number } = params;
   const TMDB_API_KEY = process.env.TMDB_API_KEY;
 

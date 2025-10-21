@@ -1,0 +1,10 @@
+# ignore unnecessary files to keep the docker image small and secure:
+# - node_modules: we install dependencies inside the container, no need to copy local modules
+# - .next: next.js build output is generated inside the container
+# - .env*: environment files contain secrets, should not be baked into the image
+# - .git: git history is not needed inside the container and will just bloat image size
+
+node_modules
+.next
+.env*
+.git

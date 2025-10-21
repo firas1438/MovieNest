@@ -1,0 +1,18 @@
+# this docker compose file is used to run the movienest app.
+# although this is a single-service app (just the next.js container),
+# we are using docker compose instead of running a simple Dockerfile
+# because it makes passing environment variables (.env.production) easier,
+# it simplifies starting/stopping the container, and ensures a consistent workflow.
+
+services:
+  web:
+    container_name: movienest-container
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env

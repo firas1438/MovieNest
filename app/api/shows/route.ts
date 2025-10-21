@@ -5,6 +5,7 @@ const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
+  
 
   const page = searchParams.get("page") || "1"
   const sortBy = searchParams.get("sortBy") || "popularity.desc"
