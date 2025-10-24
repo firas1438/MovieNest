@@ -51,17 +51,17 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
+    <div className="max-w-7xl mx-auto space-y-6 pt-3">
       {profile && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           
           {/* basic info */}
-          <div className="py-5">
+          <div className="p-1">
             <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
               {/* avatar */}
               <div className="relative">
                 <Avatar className="h-24 w-24">
-                  <AvatarImage src={profile.avatar_url || "https://i.imgur.com/rGcuutZ.jpeg"} alt="profile" />
+                  <AvatarImage src={profile.avatar_url || "https://rocksteadyboxing.org/wp-content/uploads/2024/05/gray-photo-placeholder-icon-design-ui-vector-35850819.jpg"} alt="profile" />
                   <AvatarFallback className="text-2xl">
                     {profile.full_name?.[0] || "U"}
                   </AvatarFallback>

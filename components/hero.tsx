@@ -63,7 +63,7 @@ const Hero = () => {
           </div>
         </div>
       </MotionWrapper>
-      <MotionWrapper variant="scaleIn" >
+      <MotionWrapper variant="fadeIn" >
         {/* provided by logo marquee */}
         <div className="mt-10"> 
           <ProvidedBy/>

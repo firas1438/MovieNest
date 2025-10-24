@@ -10,6 +10,8 @@ import { Bookmark } from "@/types/bookmark";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
 import Loader from "@/components/loader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Film, Tv } from "lucide-react";
+import Image from "next/image";
 
 export default function BookmarksPage() {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
@@ -65,96 +67,100 @@ export default function BookmarksPage() {
     fetchBookmarks();
   }, []);
 
-  if (loading) {
-    return <Loader/>;
-  }
+  if (loading) { return <Loader/>; }
 
   return (
-    <div className="container mx-auto py-2 lg:px-10 md:px-8 px-6 space-y-8 ">
-      
-      {/* movies section */}
-      <div>
-        <h2 className="text-[1.35rem]  font-semibold mb-2"> Movies ({moviesData.length}) </h2>
-        {moviesData.length > 0 ? (
-          <Carousel className="w-full">
-            <CarouselContent className="py-2">
-              {moviesData.map((movie) => (
-                <CarouselItem key={movie.id} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5" >
-                  <div className="relative">
-                    <MovieCard movie={movie} />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        ) : (
-          <p className=" text-muted-foreground">No bookmarked movies yet.</p>
-        )}
-      </div>
-
-      {/* shows section */}
-      <div>
-        <h2 className="text-[1.35rem]  font-semibold mb-2"> Shows ({showsData.length}) </h2>
-        {showsData.length > 0 ? (
-          <Carousel className="w-full">
-            <CarouselContent className="py-2">
-              {showsData.map((show) => (
-                <CarouselItem key={show.id} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5" >
-                  <div className="relative">
-                    <ShowCard show={show} />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        ) : (
-          <p className=" text-muted-foreground">No bookmarked shows yet.</p>
-        )}
-      </div>
-
-      {/* bookmarks stats */}
+    <div className="container mx-auto lg:pt-4 pt-2 lg:px-10 md:px-8 px-6 max-w-7xl">      
       <div className="space-y-8">
+
+        {/* bookmarks stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {/* movies bookmarked */}
-          <Card className="Server bg-card/50 backdrop-blur-sm">
-            <CardHeader className="pb-2">
+          <Card className="relative Server bg-card/50 backdrop-blur-sm overflow-hidden">
+            <Image src="/pattern.png" alt="" fill className="absolute inset-0 object-cover opacity-20" priority />
+            <CardHeader className="pb-2 relative z-10">
               <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
                 Movies Bookmarked
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="relative z-10">
               <div className="text-2xl font-bold text-center">{moviesData.length}</div>
             </CardContent>
           </Card>
-
           {/* shows bookmarked */}
-          <Card className="Server bg-card/50 backdrop-blur-sm">
-            <CardHeader className="pb-2">
+          <Card className="relative Server bg-card/50 backdrop-blur-sm overflow-hidden">
+            <Image src="/pattern.png" alt="" fill className="absolute inset-0 object-cover opacity-20" priority />
+            <CardHeader className="pb-2 relative z-10">
               <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
                 Shows Bookmarked
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="relative z-10">
               <div className="text-2xl font-bold text-center">{showsData.length}</div>
             </CardContent>
           </Card>
-
           {/* total bookmarks */}
-          <Card className="Server bg-card/50 backdrop-blur-sm">
-            <CardHeader className="pb-2">
+          <Card className="relative Server bg-card/50 backdrop-blur-sm overflow-hidden">
+            <Image src="/pattern.png" alt="" fill className="absolute inset-0 object-cover opacity-20" priority />
+            <CardHeader className="pb-2 relative z-10">
               <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
                 Total Bookmarks
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="relative z-10">
               <div className="text-2xl font-bold text-center">{moviesData.length + showsData.length}</div>
             </CardContent>
           </Card>
         </div>
+
+        {/* movies section */}
+        <div>
+          <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
+            <Film className="w-5 h-5" /> &nbsp;Movies ({moviesData.length}) 
+          </h2>
+          {moviesData.length > 0 ? (
+            <Carousel className="w-full">
+              <CarouselContent className="py-2">
+                {moviesData.map((movie) => (
+                  <CarouselItem key={movie.id} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5" >
+                    <div className="relative">
+                      <MovieCard movie={movie} />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          ) : (
+            <p className=" text-muted-foreground">No bookmarked movies yet.</p>
+          )}
+        </div>
+
+        {/* shows section */}
+        <div>
+          <h2 className="text-lg font-semibold mb-2 flex items-center gap-3">
+            <Tv className="w-5 h-5" /> Shows ({showsData.length})
+          </h2>
+          {showsData.length > 0 ? (
+            <Carousel className="w-full">
+              <CarouselContent className="py-2">
+                {showsData.map((show) => (
+                  <CarouselItem key={show.id} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5" >
+                    <div className="relative">
+                      <ShowCard show={show} />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          ) : (
+            <p className=" text-muted-foreground">No bookmarked shows yet.</p>
+          )}
+        </div>
+
       </div>
 
     </div>
